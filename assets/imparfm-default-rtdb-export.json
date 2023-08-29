@@ -1,0 +1,1462 @@
+{
+  "entregas": {
+    "-NEjeGbBJOD8O1f0_rcH": {
+      "doctos": [
+        {
+          "codFilial": 16,
+          "data": 1660705200000,
+          "nrDocto": 196243,
+          "obs": "Pedido N°: 17365 de 17/08/2022Telefones: (42) 999267621  (42) 36354386  ",
+          "parceiro": {
+            "bairro": "CENTRO                                            ",
+            "celular": "(42) 999267621 ",
+            "cep": "85301170  ",
+            "complemento": "CASA LARANJA 2 QD DA MARANATA                     ",
+            "cpfCnpj": "005.003.599-11",
+            "endereco": "RUA GENERAL ESPIRITO SANTO",
+            "municipio": "LARANJEIRAS DO SUL",
+            "nome": "SIMONE CRISTIANE SEVERO SOLANO",
+            "numero": "1767",
+            "telefone": "(42) 36354386  ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17765.1",
+              "descricao": "PIA 1,20M C/VALVULA MARMORE SINTETICO G&J PRETO",
+              "qtd": 1
+            },
+            {
+              "codigo": "18395.1",
+              "descricao": "COZINHA HERA 1,86M P/2 FORNO DEMOBILE AVENA/GRAFITO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662346800000,
+      "entregador": 1272316,
+      "filialEntrega": 0,
+      "filialOrigem": 16,
+      "nrEntrega": 489591
+    },
+    "-NEjeGbRhhjsPufZ8hBz": {
+      "doctos": [
+        {
+          "codFilial": 19,
+          "data": 1659754800000,
+          "nrDocto": 195024,
+          "obs": "VAI AVISAR ENTREGA \r\nVAI MANDA LOCALIZAÇAO\r\nCABCECEIRA LOJA\r\nPedido N°: 21919 de 06/08/2022Telefones: 44 998646959    44 998305761   ",
+          "parceiro": {
+            "bairro": "MARIPA                                            ",
+            "celular": "44 998646959   ",
+            "cep": "85.900-000",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "068.973.319-45",
+            "endereco": "RUA BARROS CASSAL",
+            "municipio": "TOLEDO",
+            "nome": "WESLEY FELIPE KLAUCK",
+            "numero": "S/N",
+            "telefone": "44 998305761   ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18012.2",
+              "descricao": "BASE BOX 79X198X40 P.A SUPERBOX MARROM VELUDO",
+              "qtd": 2
+            },
+            {
+              "codigo": "18323.1",
+              "descricao": "COLCHAO D28/200KG 158X198X30 TROY NEWFLEX MARROM/BRANCO",
+              "qtd": 1
+            },
+            {
+              "codigo": "18331.1",
+              "descricao": "CABECEIRA 1,60M MALAGA VAMFER BEGE TC507",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662433200000,
+      "entregador": 1247741,
+      "filialEntrega": 19,
+      "filialOrigem": 19,
+      "nrEntrega": 49011
+    },
+    "-NEjeGbRhhjsPufZ8hC-": {
+      "doctos": [
+        {
+          "codFilial": 29,
+          "data": 1664420400000,
+          "nrDocto": 202115,
+          "obs": "vai avisar entrega junto com roup\r\nPedido N°: 25089 de 29/09/2022Telefones: 45999823052     45999175027    ",
+          "parceiro": {
+            "bairro": "FLORESTA                                          ",
+            "celular": "45999823052    ",
+            "cep": "85800000  ",
+            "complemento": "APTO 102                                          ",
+            "cpfCnpj": "956.465.079-87",
+            "endereco": "RUA BENEDITA SOARES",
+            "municipio": "CASCAVEL",
+            "nome": "ANA PAULA FERREIRA",
+            "numero": "1940",
+            "telefone": "45999175027    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18320.1",
+              "descricao": "COLCHAO D20 88X188X12 MULTI NEWFLEX MARROM/BEGE",
+              "qtd": 1
+            }
+          ]
+        },
+        {
+          "codFilial": 29,
+          "data": 1664593200000,
+          "nrDocto": 202118,
+          "obs": "\r\nPedido N°: 25111 de 01/10/2022Telefones: 45984175672     45998004625    ",
+          "parceiro": {
+            "bairro": "Interlagos                                        ",
+            "celular": "45984175672    ",
+            "cep": "85.814-499",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "088.539.509-35",
+            "endereco": "Rua Carlos Joaquim Pezzini",
+            "municipio": "CASCAVEL",
+            "nome": "MARLOM DA SILVA VELOSO",
+            "numero": "57",
+            "telefone": "45998004625    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "10847.1",
+              "descricao": "COLCHAO BERCO D18 70X130X10 ANGEL BABY ANJOS AZUL/ROSA",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1311222,
+      "filialEntrega": 29,
+      "filialOrigem": 29,
+      "nrEntrega": 49882
+    },
+    "-NEjeGbRhhjsPufZ8hC0": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 197969,
+          "obs": "\r\nPedido N°: 434 de 31/08/2022Telefones: 4599154995      4599154995     ",
+          "parceiro": {
+            "bairro": "CENTRO                                            ",
+            "celular": "4599154995     ",
+            "cep": "85350000  ",
+            "complemento": "CASA MARON E BEGE                                 ",
+            "cpfCnpj": "091.885.459-89",
+            "endereco": "RUA COCHO GRANDE",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "GILNEI DE ALMEIDA MULLER",
+            "numero": "0000",
+            "telefone": "4599154995     ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "15798.2",
+              "descricao": "BALCAO 1,20M 3PT 2GV GOLD INDEKES NOCE/OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "16974.1",
+              "descricao": "BALCAO 80CM 2PT 925 VIV CONCEPT NOGUEIRA/OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "16975.1",
+              "descricao": "TAMPO 80CM 933 VIV CONCEPT NOGUEIRA",
+              "qtd": 1
+            },
+            {
+              "codigo": "16976.1",
+              "descricao": "ARMARIO 1,20M BASC 1VD 915 VIV CONCEPT NOGUEIRA/OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "16977.1",
+              "descricao": "ARMARIO 80CM BASC 905 VIV CONCEPT NOGUEIRA/OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "16978.1",
+              "descricao": "PANELEIRO 40CM PROF 923 VIV CONCEPT NOGUEIRA/OFF WHITE",
+              "qtd": 2
+            },
+            {
+              "codigo": "18259.1",
+              "descricao": "PIA 1,20M GRANITO MARMORARIA PROBST VERDE UBATUBA",
+              "qtd": 1
+            },
+            {
+              "codigo": "19233.1",
+              "descricao": "FOGÃO COOKTOP ATLANTA 5B 2213435 PRETO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662087600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 48914
+    },
+    "-NEjeGbRhhjsPufZ8hC1": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661828400000,
+          "nrDocto": 221615,
+          "obs": "\r\nPedido N°: 421 de 30/08/2022Telefones: 42999131444     42999131444    ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "42999131444    ",
+            "cep": "85.350-000",
+            "complemento": "CASA DE MADEIRA AO LADO DO CAMPO                  ",
+            "cpfCnpj": "162.531.039-03",
+            "endereco": "ALDEIA CAMPO DO DIA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ADRIELI REKOJ LAURINDO",
+            "numero": "1425",
+            "telefone": "42999131444    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "19207.1",
+              "descricao": "ESTANTE VALENCIA 2216688 NATURA REAL/OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "19236.1",
+              "descricao": "FOGÃO FRATELO 4B 2216743 BRANCO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662087600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 48915
+    },
+    "-NEjeGbRhhjsPufZ8hC2": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 198030,
+          "obs": "\r\nPedido N°: 446 de 31/08/2022Telefones: 42991157376     42991157376    ",
+          "parceiro": {
+            "bairro": "RURAL GUARAI                                      ",
+            "celular": "42991157376    ",
+            "cep": "85350000  ",
+            "complemento": "CASA CINZA JULIANO EIDAN                          ",
+            "cpfCnpj": "085.538.989-38",
+            "endereco": "GUARAI PROX AO ANTONIO DRANBOX PROPRIEDADE DO ELIESER RODRIG",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ANA PAULA DA CRUZ",
+            "numero": "1425",
+            "telefone": "42991157376    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18044.2",
+              "descricao": "ESTOFADO ALADIN 2,50M RET/REC POCKET APOLO MARROM TC 501",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662087600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 48916
+    },
+    "-NEjeGbRhhjsPufZ8hC3": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 221674,
+          "obs": "\r\nPedido N°: 426 de 31/08/2022Telefones: 42991022162     42991022162    ",
+          "parceiro": {
+            "bairro": "COAPAR                                            ",
+            "celular": "42991022162    ",
+            "cep": "85.350-000",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "408.220.609-49",
+            "endereco": "RUA AMOR PERFEITO",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "DIRCEU CAVASOTTO",
+            "numero": "194",
+            "telefone": "42991022162    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17347.1",
+              "descricao": "HOME SUSPENSO 1.60M ZEUS BORSARI CANELA/OFF WHITE",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662087600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 48918
+    },
+    "-NEjeGbRhhjsPufZ8hC4": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 198028,
+          "obs": "\r\nPedido N°: 444 de 31/08/2022Telefones: 42999859417     42999859417    ",
+          "parceiro": {
+            "bairro": "CENTRO                                            ",
+            "celular": "42999859417    ",
+            "cep": "85.300-000",
+            "complemento": "SALÃO BARBER SHOPING                              ",
+            "cpfCnpj": "108.217.159-09",
+            "endereco": "RUA CORONEL GUILHERME DE PAULA",
+            "municipio": "LARANJEIRAS DO SUL",
+            "nome": "CRISTIANE DE FATIMA MORAIS",
+            "numero": "1364",
+            "telefone": "42999859417    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18044.2",
+              "descricao": "ESTOFADO ALADIN 2,50M RET/REC POCKET APOLO MARROM TC 501",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662087600000,
+      "entregador": 140960,
+      "filialEntrega": 16,
+      "filialOrigem": 280,
+      "nrEntrega": 48920
+    },
+    "-NEjeGbRhhjsPufZ8hC5": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 197967,
+          "obs": "\r\nPedido N°: 428 de 31/08/2022Telefones: 42999788898     42999788898    ",
+          "parceiro": {
+            "bairro": "COAPAR                                            ",
+            "celular": "42999788898    ",
+            "cep": "85.303-030",
+            "complemento": "CASA MATERIAL VERDE                               ",
+            "cpfCnpj": "983.045.509-20",
+            "endereco": "RUA DAS VIOLETAS",
+            "municipio": "LARANJEIRAS DO SUL",
+            "nome": "MALVINA CAMPOS VERLINDE",
+            "numero": "1425",
+            "telefone": "42999788898    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "11639.1",
+              "descricao": "FOGAO 5B AUT MONACO PLUS ATLAS PRETO BIV",
+              "qtd": 1
+            }
+          ]
+        },
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 221675,
+          "obs": "\r\nPedido N°: 427 de 31/08/2022Telefones: 42998579545     42998579545    ",
+          "parceiro": {
+            "bairro": "PROGRESSO                                         ",
+            "celular": "42998579545    ",
+            "cep": "85350000  ",
+            "complemento": "NA FRENTE DO CENTRO DE IDOSO                      ",
+            "cpfCnpj": "019.011.309-08",
+            "endereco": "RUA DAS LARANJEIRAS ",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ELAINE LOOF",
+            "numero": "296",
+            "telefone": "42998579545    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18217.1",
+              "descricao": "LAV 14KG AUT LED14 ESSENCIAL CARE ELECTROLUX BRANCO 110V",
+              "qtd": 1
+            }
+          ]
+        },
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 221733,
+          "obs": "\r\nPedido N°: 436 de 31/08/2022Telefones: 42998140239     42998140239    ",
+          "parceiro": {
+            "bairro": "CENTRO                                            ",
+            "celular": "42998140239    ",
+            "cep": "85.350-000",
+            "complemento": "PREDIO DO CORREIO                                 ",
+            "cpfCnpj": "176.146.279-20",
+            "endereco": "RUA SEARA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ANTONIO SEBASTIAO DA SILVA",
+            "numero": "56",
+            "telefone": "42998140239    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17011.1",
+              "descricao": "BALCAO 2PT FORNO/MICRO 9500 HAVANA ATUALLE BRANCO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662087600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 48921
+    },
+    "-NEjeGbRhhjsPufZ8hC6": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661828400000,
+          "nrDocto": 197965,
+          "obs": "\r\nPedido N°: 414 de 30/08/2022Telefones: 42984216052     42984216052    ",
+          "parceiro": {
+            "bairro": "LOTEAMENTO BUENO                                  ",
+            "celular": "42984216052    ",
+            "cep": "85.350-970",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "031.607.289-35",
+            "endereco": "RUA DAS ORQUIDEAS",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "IRACEMA MACHADO DO AMARAL",
+            "numero": "729",
+            "telefone": "42984216052    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17150.1",
+              "descricao": "MULTIUSO 2PT C/CHAVE NAPOLE NEW MIRARACK RUSTICO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1662087600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 48923
+    },
+    "-NEjeGbRhhjsPufZ8hC7": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664334000000,
+          "nrDocto": 202022,
+          "obs": "\r\nPedido N°: 694 de 28/09/2022Telefones: 42999099558     42999099558    ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "42999099558    ",
+            "cep": "85350000  ",
+            "complemento": "FALAR COM CLAUDIA LIGAR ANTES DA ENTREGA          ",
+            "cpfCnpj": "042.936.519-50",
+            "endereco": "RUA AURORA GRANJA MILKI (IQUIPORÂ)",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ANA CLEIA DOS SANTOS",
+            "numero": "1425",
+            "telefone": "42999099558    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17270.2",
+              "descricao": "ESTOFADO APOLO 2,90M RET/REC IDEALFLEX MARROM T500",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 46156,
+      "filialEntrega": 2,
+      "filialOrigem": 280,
+      "nrEntrega": 49846
+    },
+    "-NEjeGbRhhjsPufZ8hC8": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664247600000,
+          "nrDocto": 202018,
+          "obs": "\r\nPedido N°: 692 de 27/09/2022Telefones: 45998546286     45998546286    ",
+          "parceiro": {
+            "bairro": "RURAL                                             ",
+            "celular": "45998546286    ",
+            "cep": "85.350-000",
+            "complemento": "CASA DO JAIME NA SUBIDA NA ENTRADA DOS PINHEIRO   ",
+            "cpfCnpj": "066.466.189-09",
+            "endereco": "LINHA VERONESI",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "NABILY FEROLDI",
+            "numero": "1425",
+            "telefone": "45998546286    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17145.1",
+              "descricao": "MESA DE CENTRO IRIS MAX MIRARACK OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "17291.1",
+              "descricao": "COL 193X203X33 POCKET MONTANA HELLEN PRETO ",
+              "qtd": 1
+            },
+            {
+              "codigo": "18014.5",
+              "descricao": "BASE BOX 96X203X40 P.A SUPERBOX PRETO VELUDO",
+              "qtd": 2
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49849
+    },
+    "-NEjeGbRhhjsPufZ8hC9": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664334000000,
+          "nrDocto": 202023,
+          "obs": "\r\nPedido N°: 696 de 28/09/2022Telefones: 42988756321     42988756321    ",
+          "parceiro": {
+            "bairro": "CENTRO                                            ",
+            "celular": "42988756321    ",
+            "cep": "85350000  ",
+            "complemento": "CS MADEIRA ENTRADA ESQUERDA DA IGREJA             ",
+            "cpfCnpj": "096.845.249-35",
+            "endereco": "NO TREVO PERTO DA IGREJA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ZEFELINA VONKAG CORDEIRO",
+            "numero": "1425",
+            "telefone": "42988756321    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17189.1",
+              "descricao": "LAV 10KG SEMIAUTO LITE FAMILY MUELLER PRETO 110V",
+              "qtd": 1
+            },
+            {
+              "codigo": "17765.1",
+              "descricao": "PIA 1,20M C/VALVULA MARMORE SINTETICO G&J PRETO",
+              "qtd": 1
+            },
+            {
+              "codigo": "18395.1",
+              "descricao": "COZINHA HERA 1,86M P/2 FORNO DEMOBILE AVENA/GRAFITO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49854
+    },
+    "-NEjeGcARACEunypCUhF": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664334000000,
+          "nrDocto": 202025,
+          "obs": "\r\nPedido N°: 701 de 28/09/2022Telefones: 42998191909     42998191909    ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "42998191909    ",
+            "cep": "85.350-000",
+            "complemento": "DEPOIS DO TRILHO DO TREM                          ",
+            "cpfCnpj": "092.455.389-82",
+            "endereco": "GUARAI DA ERVEIRA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "VIVIANE SUELI TROCKIN",
+            "numero": "1425",
+            "telefone": "42998191909    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18575.1",
+              "descricao": "COMODA 4GV 2PT DIAMANTE MIRARACK IPE/CINZA",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49855
+    },
+    "-NEjeGfaU4tHEA3D9uaL": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661137200000,
+          "nrDocto": 220521,
+          "obs": "Pedido N°: 358 de 22/08/2022Telefones: 42984287866     42984287866    ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "42984287866    ",
+            "cep": "85.350-000",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "139.981.859-76",
+            "endereco": "SAO ROQUE",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "DANIELE RAMOS ANTUNES DOS SANTOS",
+            "numero": "1425",
+            "telefone": "42984287866    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17952.1",
+              "descricao": "CAMA SOLTEIRO 90CM ADESIVADA LUKE VERMELHO CARRO",
+              "qtd": 1
+            },
+            {
+              "codigo": "18320.1",
+              "descricao": "COLCHAO D20 88X188X12 MULTI NEWFLEX MARROM/BEGE",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49856
+    },
+    "-NEjeGi1Ceaoeb2l57l4": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664420400000,
+          "nrDocto": 202029,
+          "obs": "\r\nPedido N°: 712 de 29/09/2022Telefones: 42999040848     42999040848    ",
+          "parceiro": {
+            "bairro": "ERVERIA                                           ",
+            "celular": "42999040848    ",
+            "cep": "85350000  ",
+            "complemento": "NA ESTRADA DO LADO DO PAVILHA VAI RETO CASA ESCURA",
+            "cpfCnpj": "038.231.279-18",
+            "endereco": "EVEIRA TEM O PAVILHAO ESTRADA ATRAS DO PAVILHAO ",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ROSA AMANCIO DO ROSARIO ",
+            "numero": "1425",
+            "telefone": "42999040848    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17294.1",
+              "descricao": "COL D33 138X188X24 DA VINCI HELLEN PRETO ",
+              "qtd": 1
+            },
+            {
+              "codigo": "18015.7",
+              "descricao": "BASE BOX 138X188X40 P.A SUPERBOX PRETO VELUDO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49857
+    },
+    "-NEjeGmB0Wjn8nPlsHXG": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664420400000,
+          "nrDocto": 202238,
+          "obs": "\r\nPedido N°: 713 de 29/09/2022Telefones: 42999040848     42999040848    ",
+          "parceiro": {
+            "bairro": "ERVERIA                                           ",
+            "celular": "42999040848    ",
+            "cep": "85350000  ",
+            "complemento": "NA ESTRADA DO LADO DO PAVILHA VAI RETO CASA ESCURA",
+            "cpfCnpj": "038.231.279-18",
+            "endereco": "EVEIRA TEM O PAVILHAO ESTRADA ATRAS DO PAVILHAO ",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ROSA AMANCIO DO ROSARIO ",
+            "numero": "1425",
+            "telefone": "42999040848    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18330.1",
+              "descricao": "CABECEIRA 1,40M MALAGA VAMFER BEGE TC507",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49858
+    },
+    "-NEjeGr45PIsACZCiW7x": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1661914800000,
+          "nrDocto": 197968,
+          "obs": "\r\nPedido N°: 433 de 31/08/2022Telefones: 429923451214    429923451214   ",
+          "parceiro": {
+            "bairro": "COMUNIDADE DO GUARANI                             ",
+            "celular": "429923451214   ",
+            "cep": "85350000  ",
+            "complemento": "CASA MADEIRA ANTES DE CHEGAR NA IGREJA CASA ROSA  ",
+            "cpfCnpj": "046.534.479-85",
+            "endereco": "GUARAI DA ERVERA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "DILAIR FERREIRA DE JESUS",
+            "numero": "1425",
+            "telefone": "429923451214   ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18694.1",
+              "descricao": "BALCAO FORNO 020 2217296 CASTANHO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49859
+    },
+    "-NEjeGr45PIsACZCiW7y": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1663729200000,
+          "nrDocto": 201101,
+          "obs": "\r\nPedido N°: 661 de 21/09/2022Telefones: 42991086900     42991086900    ",
+          "parceiro": {
+            "bairro": "FAZENDA VELHA                                     ",
+            "celular": "42991086900    ",
+            "cep": "85.350-000",
+            "complemento": "FAZENDA DO JAIRO MIORANZA                         ",
+            "cpfCnpj": "076.263.089-21",
+            "endereco": "FAZENDA VELHA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "LOURDES DE SOUZA DA SILVA",
+            "numero": "1425",
+            "telefone": "42991086900    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18943.1",
+              "descricao": "COZ RENATA 2216957 IPE",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49860
+    },
+    "-NEjeGr45PIsACZCiW7z": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664247600000,
+          "nrDocto": 202016,
+          "obs": "\r\nPedido N°: 690 de 27/09/2022Telefones: 4299832732      4699832732     ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "4299832732     ",
+            "cep": "85.301-000",
+            "complemento": "CASA MADEIRA COR AMARELINHA                       ",
+            "cpfCnpj": "069.888.119-23",
+            "endereco": "BEIRA RIO",
+            "municipio": "LARANJEIRAS DO SUL",
+            "nome": "EDINEI SIMOES",
+            "numero": "1425",
+            "telefone": "4699832732     ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "12209.3",
+              "descricao": "CENTRIFUGA DE ROUPAS SUPER MUELLER PRETO 110 V",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49861
+    },
+    "-NEjeGr45PIsACZCiW8-": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664420400000,
+          "nrDocto": 202026,
+          "obs": "\r\nPedido N°: 708 de 29/09/2022Telefones: 4299053381      4299053381     ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "4299053381     ",
+            "cep": "85.350-000",
+            "complemento": "CASA MADEIRA                                      ",
+            "cpfCnpj": "089.590.029-76",
+            "endereco": "PAI QUERE",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "CIDINEIA RODRIGUES DOS SANTOS",
+            "numero": "1425",
+            "telefone": "4299053381     ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "1052.4",
+              "descricao": "CENTRIFUGA DE ROUPAS DRY MUELLER PRETO 110 V",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49862
+    },
+    "-NEjeGr45PIsACZCiW80": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664334000000,
+          "nrDocto": 202020,
+          "obs": "\r\nPedido N°: 693 de 28/09/2022Telefones: 4288768673      4288768673     ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "4288768673     ",
+            "cep": "85.350-000",
+            "complemento": "CASA MATERIAL COR VERDE                           ",
+            "cpfCnpj": "053.078.719-96",
+            "endereco": "ASSENTAMENTO TERRA LIVRE KM 479",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ROSALINA VAN HAANDEL",
+            "numero": "480",
+            "telefone": "4288768673     ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17987.1",
+              "descricao": "MESA 120X80CM VIDRO ME187 METALFLEX CROMADO",
+              "qtd": 1
+            },
+            {
+              "codigo": "17988.1",
+              "descricao": "CADEIRA CA-026 C/GRADIL METALFLEX CROMADO/CINZA D-18",
+              "qtd": 4
+            }
+          ]
+        }
+      ],
+      "emissao": 1664766000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49863
+    },
+    "-NEjeGr45PIsACZCiW81": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664506800000,
+          "nrDocto": 202030,
+          "obs": "\r\nPedido N°: 715 de 30/09/2022Telefones: 4299756220      4299756220     ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "4299756220     ",
+            "cep": "85.350-000",
+            "complemento": "CASA PERTO DO ALMIR MAROSTICA                     ",
+            "cpfCnpj": "026.871.769-90",
+            "endereco": "COCHO GRANDE",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "LURDES APARECIDA MAROSTICA",
+            "numero": "1425",
+            "telefone": "4299756220     ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18562.1",
+              "descricao": "RACK LARIMAR BECHARA OFF WHITE/RATTAN",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1664852400000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 49901
+    },
+    "-NEjeGvxCBazVHFF8E3u": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664938800000,
+          "nrDocto": 202635,
+          "obs": "\r\nPedido N°: 749 de 05/10/2022Telefones: 42988573679     42988573679    ",
+          "parceiro": {
+            "bairro": "CENTRO                                            ",
+            "celular": "42988573679    ",
+            "cep": "85.350-000",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "082.523.299-69",
+            "endereco": "RUA SANTA CATARIAN",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "CRISTIANE DE LIMA RIBEIRO",
+            "numero": "1425",
+            "telefone": "42988573679    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "997.3",
+              "descricao": "LAV 10KG 9PROG NEWMAQ PRETO 110 V",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665111600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50036
+    },
+    "-NEjeGvxCBazVHFF8E3v": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664852400000,
+          "nrDocto": 202633,
+          "obs": "\r\nPedido N°: 746 de 04/10/2022Telefones: 4298854321      42988546321    ",
+          "parceiro": {
+            "bairro": "TAQUARA                                           ",
+            "celular": "4298854321     ",
+            "cep": "85350000  ",
+            "complemento": "CASA MATERIAL AZUL ESCURO                         ",
+            "cpfCnpj": "077.913.559-81",
+            "endereco": "AGUA SANTA,PERTO DA CASA DO NEOLI",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "JOCELIA MUVAN MATHIAS",
+            "numero": "1425",
+            "telefone": "42988546321    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "14643.2",
+              "descricao": "LAV 12KG 9PROG NEWMAQ PRETO 110 V",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665111600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50037
+    },
+    "-NEjeGvxCBazVHFF8E3w": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664938800000,
+          "nrDocto": 202636,
+          "obs": "\r\nPedido N°: 751 de 05/10/2022Telefones: 69993439339     69993439339    ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "69993439339    ",
+            "cep": "85.350-000",
+            "complemento": "CASA MADEIRA                                      ",
+            "cpfCnpj": "913.941.989-49",
+            "endereco": "DIVISOR EM FRENTE A IGRAJA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "VANIR MACHADO DOS SANTOS",
+            "numero": "1425",
+            "telefone": "69993439339    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17958.1",
+              "descricao": "BALCAO 2PT 70CM DUPLO FORNO LUAN NOCE/OFF WHITE",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665111600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50039
+    },
+    "-NEjeH0KtRAGdwuSjf9y": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664938800000,
+          "nrDocto": 202637,
+          "obs": "\r\nPedido N°: 753 de 05/10/2022Telefones: 4288110806      42988110806    ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "4288110806     ",
+            "cep": "85.350-000",
+            "complemento": "CASA PRA LA DA PONTE ENTRA NO MERCADINHO CARDOSO  ",
+            "cpfCnpj": "589.286.939-34",
+            "endereco": "RIO PERREIRA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "HERONDINA PILOTTO",
+            "numero": "1425",
+            "telefone": "42988110806    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18220.1",
+              "descricao": "COMODA 4GV 2PT RODIZIO DUDA BORSARI CANELA/OFF WHITE  - 97X136X44",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665111600000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50040
+    },
+    "-NEjeH0KtRAGdwuSjf9z": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664506800000,
+          "nrDocto": 202032,
+          "obs": "\r\nPedido N°: 720 de 30/09/2022Telefones: 4236548921      4236548921     ",
+          "parceiro": {
+            "bairro": "CAMPO DO DIA                                      ",
+            "celular": "4236548921     ",
+            "cep": "85350000  ",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "053.324.189-81",
+            "endereco": "PXM AO COLEGIO PERTO DA ENTRADA CASA VERMELHA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "MARIA NIRAJAR PERREIRA",
+            "numero": "1425",
+            "telefone": "4236548921     ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "14643.2",
+              "descricao": "LAV 12KG 9PROG NEWMAQ PRETO 110 V",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665370800000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50078
+    },
+    "-NEjeH6RsJsjPTvBh8W7": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1665370800000,
+          "nrDocto": 226988,
+          "obs": "\r\nPedido N°: 796 de 10/10/2022Telefones: 42999044919     42999044919    ",
+          "parceiro": {
+            "bairro": "AGUA VERDE                                        ",
+            "celular": "42999044919    ",
+            "cep": "85350000  ",
+            "complemento": "PRA BAIXO DA IGREJA SANTO ANTONIO                 ",
+            "cpfCnpj": "065.920.439-89",
+            "endereco": "RUA TIRADENTES ",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "CLEBER GIONE MENDES",
+            "numero": "922",
+            "telefone": "42999044919    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18326.1",
+              "descricao": "CONJ ESTOFADO TOP 3X2L CTO PUFF ESTOFADOS PARANA MARROM",
+              "qtd": 1
+            },
+            {
+              "codigo": "18395.1",
+              "descricao": "COZINHA HERA 1,86M P/2 FORNO DEMOBILE AVENA/GRAFITO",
+              "qtd": 1
+            },
+            {
+              "codigo": "18580.1",
+              "descricao": "BOX CONJUGADO 88X188X52 ITALIA VERSANI PRETO/BRANCO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665457200000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50118
+    },
+    "-NEjeH6RsJsjPTvBh8W8": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1665370800000,
+          "nrDocto": 203133,
+          "obs": "\r\nPedido N°: 795 de 10/10/2022Telefones: 42988117333     42988117333    ",
+          "parceiro": {
+            "bairro": "CENTRO                                            ",
+            "celular": "42988117333    ",
+            "cep": "85350000  ",
+            "complemento": "SOBRADO EM FRENTE AO PRONTO ATENDIMENTO           ",
+            "cpfCnpj": "031.635.959-95",
+            "endereco": "RUA BAIA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "RELINDES APARECIDA JACOBY RESMINI",
+            "numero": "177",
+            "telefone": "42988117333    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18294.1",
+              "descricao": "ROUP 4PT 2GV TURIM BORSARI CANELA/OFF WHITE",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665457200000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50119
+    },
+    "-NEjeHHBFXz3QB8XUMXp": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1665111600000,
+          "nrDocto": 202889,
+          "obs": "\r\nPedido N°: 781 de 07/10/2022Telefones: 42988321153     42988321153    ",
+          "parceiro": {
+            "bairro": "PRIMAVERA                                         ",
+            "celular": "42988321153    ",
+            "cep": "85.350-000",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "126.034.679-05",
+            "endereco": "ALDINO DOMINGUES PASSARIM",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "GRAZIELA  MOISES DA ROSA",
+            "numero": "1346",
+            "telefone": "42988321153    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "17982.1",
+              "descricao": "COZINHA ALVORADA 1,83M ATUALLE CANELATO/OFF WHITE",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665457200000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50120
+    },
+    "-NEjeHKaxU7GsVmrSLj6": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664593200000,
+          "nrDocto": 202373,
+          "obs": "\r\nPedido N°: 728 de 01/10/2022Telefones: 429986047       4299860347     ",
+          "parceiro": {
+            "bairro": "COAPAR                                            ",
+            "celular": "429986047      ",
+            "cep": "85350000  ",
+            "complemento": "CASA COR LARANJA                                  ",
+            "cpfCnpj": "103.694.289-94",
+            "endereco": "RUA DAS CAMELIAS",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "RUDINEI DE OLIVEIRA",
+            "numero": "194",
+            "telefone": "4299860347     ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18395.1",
+              "descricao": "COZINHA HERA 1,86M P/2 FORNO DEMOBILE AVENA/GRAFITO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665457200000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50121
+    },
+    "-NEjeHKaxU7GsVmrSLj7": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1665111600000,
+          "nrDocto": 202887,
+          "obs": "\r\nPedido N°: 773 de 07/10/2022Telefones: 42984347983     42984347983    ",
+          "parceiro": {
+            "bairro": "RIO PERREIRA                                      ",
+            "celular": "42984347983    ",
+            "cep": "85350000  ",
+            "complemento": "CASA COR VERDE                                    ",
+            "cpfCnpj": "036.333.629-08",
+            "endereco": "RIO PERREIRA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ELIANE ANDRADE",
+            "numero": "1425",
+            "telefone": "42984347983    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18225.1",
+              "descricao": "TV 32\" LED SMART 32V35KB TB007 TOSHIBA PRETO BIV",
+              "qtd": 1
+            },
+            {
+              "codigo": "18263.1",
+              "descricao": "PAINEL 120CM DILETTO CAEMMUN BURITI/OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "18393.1",
+              "descricao": "ROUP 4PT 3GV CAPELINHA PERSIA DEMOBILE AMENDOLA  187X161X44",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665630000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50204
+    },
+    "-NEjeHKaxU7GsVmrSLj8": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1665370800000,
+          "nrDocto": 203132,
+          "obs": "\r\nPedido N°: 789 de 10/10/2022Telefones: 42988573679     429988573679   ",
+          "parceiro": {
+            "bairro": "INTERIOR                                          ",
+            "celular": "42988573679    ",
+            "cep": "85350000  ",
+            "complemento": "CASA DE MADEIRA SEM PINTURA                       ",
+            "cpfCnpj": "068.303.209-76",
+            "endereco": "ALDEIA NOVA JACUTINGA",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "MARIA NIPE VANH JECA",
+            "numero": "1425",
+            "telefone": "429988573679   ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "14643.2",
+              "descricao": "LAV 12KG 9PROG NEWMAQ PRETO 110 V",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665630000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50206
+    },
+    "-NEjeHKaxU7GsVmrSLj9": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1664938800000,
+          "nrDocto": 202638,
+          "obs": "\r\nPedido N°: 756 de 05/10/2022Telefones: 42991040195     42991040195    ",
+          "parceiro": {
+            "bairro": "XAGU1                                             ",
+            "celular": "42991040195    ",
+            "cep": "85.350-000",
+            "complemento": "CASA                                              ",
+            "cpfCnpj": "337.736.709-82",
+            "endereco": "XAGU AREA DE CIMA PROX A COMUNIDADE",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "PEDRO ANTUNES",
+            "numero": "1425",
+            "telefone": "42991040195    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "15798.2",
+              "descricao": "BALCAO 1,20M 3PT 2GV GOLD INDEKES NOCE/OFF WHITE",
+              "qtd": 1
+            },
+            {
+              "codigo": "18267.1",
+              "descricao": "COLCHAO 138X188X28 POCKET PRISMA NEWFLEX CINZA/BRANCO",
+              "qtd": 1
+            },
+            {
+              "codigo": "19288.1",
+              "descricao": "TAMPO 1200 AMERICA 2216932 CASTANHO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665630000000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50207
+    },
+    "-NEjeHKaxU7GsVmrSLjA": {
+      "doctos": [
+        {
+          "codFilial": 280,
+          "data": 1665630000000,
+          "nrDocto": 203625,
+          "obs": "\r\nPedido N°: 810 de 13/10/2022Telefones: 42991450229     42991450229    ",
+          "parceiro": {
+            "bairro": "INETRIOR                                          ",
+            "celular": "42991450229    ",
+            "cep": "85350000  ",
+            "complemento": "PERTO DO COLEGIO CASA DE MATERIAL BRANCA          ",
+            "cpfCnpj": "060.451.069-11",
+            "endereco": "ALDEIA DO LEBRE SENTIDO QUEDAS",
+            "municipio": "NOVA LARANJEIRAS",
+            "nome": "ADILIA DOS SANTOS",
+            "numero": "1425",
+            "telefone": "42991450229    ",
+            "uf": "PR"
+          },
+          "produtos": [
+            {
+              "codigo": "18579.1",
+              "descricao": "BOX CONJUGADO 1,38X188X52 ITALIA VERSANI PRETO/BRANCO",
+              "qtd": 1
+            }
+          ]
+        }
+      ],
+      "emissao": 1665716400000,
+      "entregador": 1331897,
+      "filialEntrega": 280,
+      "filialOrigem": 280,
+      "nrEntrega": 50250
+    }
+  }
+}
