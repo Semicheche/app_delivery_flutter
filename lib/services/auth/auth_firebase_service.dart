@@ -1,8 +1,11 @@
+import 'package:delivery_app/services/auth/atuh_save_credential.dart';
 import 'package:delivery_app/services/auth/auth_service.dart';
 import 'package:delivery_app/models/auth_user.dart';
+import 'package:delivery_app/services/biometry/biometry.dart';
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:local_auth/local_auth.dart';
 
 class AuthFirebaseService implements AuthService {
   static AuthUser? _currentUser;
@@ -10,8 +13,6 @@ class AuthFirebaseService implements AuthService {
   static final _userStream = Stream<AuthUser?>.multi((controller) async { 
     final authChanges = FirebaseAuth.instance.authStateChanges();
     await for(final user in authChanges) {
-      print('EMAIL CHANGE');
-      print(user);
       _currentUser = user == null ? null : _toAuthUser(user);
       controller.add(_currentUser);
     }
@@ -34,10 +35,18 @@ class AuthFirebaseService implements AuthService {
   }
 
   Future<void> login(String email, String password) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-    // print(context);
+   
+    try{
+        await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    }catch(err) {
+      
+    }finally{
+      print('PASSOU NO FINALLY');
+    }
+
   }
   Future<void> logout() async {
+
     FirebaseAuth.instance.signOut();
   }
 

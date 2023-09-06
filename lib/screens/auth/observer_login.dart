@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/firebase_options.dart';
 import 'package:delivery_app/models/auth_user.dart';
 import 'package:delivery_app/screens/laoding_page.dart';
@@ -5,6 +6,7 @@ import 'package:delivery_app/screens/auth/login_auth.dart';
 import 'package:delivery_app/screens/menu_page.dart';
 import 'package:delivery_app/services/auth/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class ObserverLogin extends StatelessWidget {
@@ -14,6 +16,7 @@ class ObserverLogin extends StatelessWidget {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
       );
+    FirebaseFirestore.instance.enablePersistence;
   }
 
   @override
@@ -32,7 +35,6 @@ class ObserverLogin extends StatelessWidget {
                 } else {
                   return snapshot.hasData ? MenuPage() : LoginAuth();
                 }
-
             });
           }
         },

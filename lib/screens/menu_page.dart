@@ -1,4 +1,4 @@
-import 'package:delivery_app/screens/entregas/entregas_list.dart';
+import 'package:delivery_app/screens/entregas/list_entrega.dart';
 import 'package:delivery_app/screens/montagens/montagens_list.dart';
 import 'package:delivery_app/services/auth/auth_firebase_service.dart';
 import 'package:delivery_app/services/auth/login_auth_service.dart';
@@ -27,6 +27,7 @@ class _MenuPageState extends State<MenuPage> {
             elevation: 3,
           ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 150),
@@ -34,13 +35,13 @@ class _MenuPageState extends State<MenuPage> {
               child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EntregasList()),
+                      MaterialPageRoute(builder: (context) => ListEntrega()),
                     );
                   },
                   label: const Text('ENTREGAS'),
                   icon: Icon(Icons.local_shipping_rounded,size: 100.0),
                   style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white70, //elevated btton background color
+                          // backgroundColor: Colors.grey.shade100,
                           minimumSize: Size(150, 150)
                         ),
                 ),

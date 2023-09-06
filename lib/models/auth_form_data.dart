@@ -3,6 +3,7 @@ enum AuthMode { Login, Signup}
 class AuthFormData {
   String email = '';
   String password = '';
+  bool saveCredentials = false;
 
   AuthMode _mode = AuthMode.Login;
 

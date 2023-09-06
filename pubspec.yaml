@@ -39,6 +39,20 @@ dependencies:
   firebase_core: ^2.15.1
   image_picker: ^1.0.2
   cloud_firestore: ^4.9.0
+  syncfusion_flutter_signaturepad: ^22.2.11
+  camera: ^0.10.5+4
+  path_provider: ^2.1.0
+  path: ^1.8.3
+  provider: ^6.0.5
+  carousel_slider: ^4.2.1
+  top_snackbar_flutter: ^3.1.0
+  location: ^5.0.0
+  firebase_storage: ^11.2.6
+  local_auth: ^2.1.7
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.1
+  badges: ^3.1.2
+  
 
 
 dev_dependencies:
@@ -66,6 +80,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/delivery-man1.png
+    - assets/images/delivery-man.png
     - assets/imparfm-default-rtdb-export.json
   #   - images/a_dot_ham.jpeg
 
