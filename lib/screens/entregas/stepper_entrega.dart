@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 import 'package:delivery_app/models/data_entrega.dart';
 import 'package:delivery_app/screens/entregas/description_entrega.dart';
@@ -21,8 +23,13 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class StepperEntrega extends StatefulWidget {
   var item;
+  // var entrega;
 
-  StepperEntrega({Key? key, required this.item}) : super(key: key);
+  StepperEntrega({
+    Key? key, 
+    required this.item,
+    // this.entrega
+    }) : super(key: key);
 
   @override
   State<StepperEntrega> createState() => _StepperEntregasState();
@@ -33,36 +40,26 @@ class StepperEntrega extends StatefulWidget {
 class _StepperEntregasState extends State<StepperEntrega> {
   int _index = 0;
   bool isChecked = false;
-  final _dataform = DataEntrega('', 
-                                null,
-                                null, 
-                                null, 
-                                null, 
-                                null, 
-                                [], 
-                                null, 
-                                null,
-                                null,
-                                null,
-                                0);//EntregaFormData();
-  LocationData? _locationData = null;
 
+
+  
+  late Entrega _dataform;
+  var data;
+  LocationData? _locationData = null;
+  double _padding = 190;
 
   Future<void> _getCurrentLocation() async {
-    print('Get Location');
+    
     final PermissionStatus _permissionGranted;
     final _serviceEnable = await Location().serviceEnabled();
-    print(_serviceEnable);
+  
     _permissionGranted = await Location().requestPermission();
     if (!_serviceEnable) {
-      print('not enable');
       return;
     }
     if (_permissionGranted != PermissionStatus.denied){
-      print('pegou a localizacao0');
       final locationData = await Location().getLocation();
       
-      print(locationData.latitude);
       _locationData = locationData;
     }
   }
@@ -74,15 +71,25 @@ class _StepperEntregasState extends State<StepperEntrega> {
 
     return LocationEntrega(_locationData!.latitude, _locationData!.longitude);
   }
+  
 
   void _onSubmitEntrega() async {
-    Navigator.push(context,
-      MaterialPageRoute(builder: (context) => const LoadingPositionPage()),
-    );
+    if (isChecked && _dataform.observacao == ''){
+      showTopSnackBar(
+        Overlay.of(context), 
+        CustomSnackBar.error(message: 'insira uma observação!'),
+      );
+      return;
+    }
+    if (!isChecked){
+      Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const LoadingPositionPage()),
+      );
+    }
     await _getCurrentLocation();
     final LocationEntrega? localizacao = getLocation();
 
-    DataEntrega _dataSubmit = DataEntrega(
+    Entrega _dataSubmit = Entrega(
       '',
       isChecked ? null : _dataform.name, 
       isChecked ? null : _dataform.cpfCnpj,
@@ -94,7 +101,8 @@ class _StepperEntregasState extends State<StepperEntrega> {
       _dataform.observacao,
       DateTime.now(),
       DateTime.now(),
-      _dataform.idEntregador
+      _dataform.idEntregador,
+      []
       );
     
     if (_dataSubmit != null) {
@@ -128,228 +136,286 @@ class _StepperEntregasState extends State<StepperEntrega> {
 
   }
 
+
+
+  @override
+  void initState(){
+
+  }
+
+  Future<Map<String, dynamic>> firebaseCallAsync(int nrEntrega) async{
+    print(nrEntrega);
+    data = await FirebaseServiceEntrega().getCollection('entregas', 'idEntrega', '==', nrEntrega);
+    print(data);
+    return data;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var _item = widget.item;
-    var textSize =  TextStyle(fontSize: 17);
-
-    _dataform.idEntrega = _item['nrEntrega'];
-    _dataform.idEntregador = _item['entregador'];
-    return Scaffold(
-      appBar: AppBar(
+     var _item = widget.item;
+    
+      Widget deafaultTemplate(AsyncSnapshot snapshot){
+        return Scaffold(
+            appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColor,
           automaticallyImplyLeading: true,
           actions: [],
           title: Text(" Entrega Nº ${_item['nrEntrega']}", style: TextStyle(color: Colors.white),),
           centerTitle: true,
           elevation: 3,
-        ),
-      body:
-       Container(
-          child: Column(
-            children: [
-              Expanded(
-                child: Stepper(
-            type: StepperType.horizontal,
-            currentStep: _index,
-            onStepCancel: () {
-              if (_index > 0) {
-                setState(() {
-                  if (isChecked) {
-                    _index -= 3;
-                    isChecked = false;
-                  }else{
-                    _index -= 1;
-                  }
-                });
-              }
-            },
-            onStepContinue: () {
-              if (_index <= 2) {
-                setState(() {
-                  _index += 1;
-                });
-              }
-            },
-            onStepTapped: (int index) {
-              setState(() {
-                _index = index;
-              });
-            },
-            controlsBuilder: (BuildContext context, ControlsDetails details) {
-              return Container(
-                margin: EdgeInsets.only(top: 50),
-                child: Row(
-                  children: [
-                    if ( _index < 3)
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: details.onStepContinue,
-                          child: Text('Proximo' ),
-                          )
-                        ),
-                      SizedBox(width: 12,),
-                    if (_index != 0 && _index < 3)
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: details.onStepCancel,
-                          child: Text('Voltar'),
-                          )
-                      ),
-                  ],
-                ),
-              );
-            },
-            steps: <Step>[
-              Step(
-                isActive: _index >= 0,
-                title: const Text('Descrição'),
-                content: Column(
-                  children: [
-                         const Text('INFORMAÇÕES DO CLIENTE', 
-                          style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  ),
-                          ),
-                        Row( 
-                          children: [
-                            Text('Cliente não se encontra', style: textSize,),
-                            Checkbox(
-                              value: isChecked, 
-                              onChanged: (bool? value ) {
-                                setState(() {
-                                  isChecked = value!;
-                                  _index = 3;
-                                });
-                              }),
-                            ]
-                          ),
-                        descriptionEntrega(data: _dataform,item: _item),
-                  ]
-                ),
-                state: _index > 0 ? StepState.complete : StepState.disabled
-              ),
-              Step(
-                isActive: _index >= 1,
-                title: Text('Assinatura'),
-                content: SignatureEntrega(data: _dataform),
-                state: _index > 1 ? StepState.complete : StepState.disabled
-              ),
-              Step(
-                isActive: _index >= 2,
-                title: const Text('Foto'),
-                content: Container(
-                  alignment: Alignment.centerLeft,
-                  child:PictureEntrega(data: _dataform),
-                ),
-                state: _index > 2 ? StepState.complete : StepState.disabled
-              ),
-              Step(
-                isActive: _index >= 3,
-                title: const Text('Enviar'),
-                content: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 190,
-                          horizontal: 0
-                        ),
-                        child: Column(
-                          children: [ 
-                            if (!isChecked) Container(
-                              child: Column(
-                                children: [
-                                Text('CHECKLIST FINAL', style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                        ),),
-                                Row(
-                                  children: [
-                                      _dataform.name != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
-                                      Text('Nome Cliente' , style: textSize,) 
-                                  ]
-                                ),
-                                SizedBox(height: 10,),
-                                Row(
-                                  children: [
-                                      _dataform.cpfCnpj != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
-                                      Text('CPF Cliente' , style: textSize,)
-                                ]),
-                                SizedBox(height: 10,),
-                                Row(
-                                  children: [
-                                      _dataform.assinatura != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
-                                      Text('Assinatura Cliente' , style: textSize,)
-                                ]),
-                                SizedBox(height: 10,),
-                                Row(
-                                  children: [
-                                      _dataform.imagems != null  ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
-                                      Text('${_dataform.imagems?.length} Fotos dos produtos Entregues.' , style: textSize,)
-                                ]),
+        ), body: Center(
+                  child: Text('AQUI ${snapshot.data} '),
+                    )
+          );
+      }
+    
 
-                                SizedBox(height: 10),
-                                
-                                ]
-                              )
-                            ),
-                            if (isChecked) Container(
-                              child: Column(children: [
-                                 const Text('INSIRA UMA OBSERVAÇÃO',
-                                  style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                        ), ),
-                                SizedBox(height: 20,),
-                                 TextFormField(
-                                  key: ValueKey('OBS:'),
-                                  initialValue: _dataform.observacao,
-                                  onChanged: (obs) => _dataform.observacao = obs,
-                                  validator: (_obs) {
-                                    final obs = _obs ?? '';
-                                    if (obs.trim() != ''){
-                                      return 'OBS e obrigatorio!';
-                                    }
-                                  },
-                                  decoration: const InputDecoration(
-                                    labelText: 'Observação:',
-                                    hintMaxLines: 4,
-                                    border: OutlineInputBorder(),
-                                    
-                                  ),
-                                ),
-                               
-                              ]),
-                      
-                            )
-                            ]
-                        )
-                      ),
+     return FutureBuilder(
+      future: firebaseCallAsync(_item['nrEntrega']), 
+      builder: (context, AsyncSnapshot snapshot) {
+        print(snapshot.connectionState);
+        if (snapshot.connectionState == ConnectionState.waiting){
+          return LoadingPage();
+        }else if (snapshot.hasError){
+          return deafaultTemplate(snapshot);
+        }else{
 
-                      Padding(
-                          padding: EdgeInsets.all(5),
-                          child: Container( 
-                            child : ElevatedButton.icon(
-                                onPressed: _onSubmitEntrega,
-                                icon: Icon(Icons.check_circle_outline_outlined), 
-                                label: Text('Conlcuir Entrega')
-                              ),
-                            )
-                      ),
-                    ]),
-                ),
-                state: _index > 3 ? StepState.complete : StepState.disabled
-              ),
-            ],
-          )
-              )
-            ])
-        )
-    );
+          return  deafaultTemplate(snapshot);
+        }
+      });
   }
+
+
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   var _item = widget.item;
+  //   var _entrega = null;
+  //   var textSize =  TextStyle(fontSize: 17);
+  //   var itemsObs = [];
+  //   var _dataform = Entrega( '', null, null, null, null, null, [], null, null, null, null, 0,[]);
+ 
+
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //         backgroundColor: Theme.of(context).primaryColor,
+  //         automaticallyImplyLeading: true,
+  //         actions: [],
+  //         title: Text(" Entrega Nº ${_item['nrEntrega']}", style: TextStyle(color: Colors.white),),
+  //         centerTitle: true,
+  //         elevation: 3,
+  //       ),
+  //     body:
+  //      Container(
+  //         child: Column(
+  //           children: [
+  //             Expanded(
+  //               child: Stepper(
+  //           type: StepperType.horizontal,
+  //           currentStep: _index,
+  //           onStepCancel: () {
+  //             if (_index > 0) {
+  //               setState(() {
+  //                 if (isChecked) {
+  //                   _index -= 3;
+  //                   isChecked = false;
+  //                 }else{
+  //                   _index -= 1;
+  //                 }
+  //               });
+  //             }
+  //           },
+  //           onStepContinue: () {
+  //             if (_index <= 2) {
+  //               setState(() {
+  //                 _index += 1;
+  //               });
+  //             }
+  //           },
+  //           onStepTapped: (int index) {
+  //             setState(() {
+  //               _index = index;
+  //             });
+  //           },
+  //           controlsBuilder: (BuildContext context, ControlsDetails details) {
+  //             return Container(
+  //               margin: EdgeInsets.only(top: 50),
+  //               child: Row(
+  //                 children: [
+  //                   if ( _index < 3)
+  //                     Expanded(
+  //                       child: ElevatedButton(
+  //                         onPressed: details.onStepContinue,
+  //                         child: Text('Proximo' ),
+  //                         )
+  //                       ),
+  //                     SizedBox(width: 12,),
+  //                   if (_index != 0 && (_index < 3 ))
+  //                     Expanded(
+  //                       child: ElevatedButton(
+  //                         onPressed: details.onStepCancel,
+  //                         child: Text('Voltar'),
+  //                         )
+  //                     ),
+  //                 ],
+  //               ),
+  //             );
+  //           },
+  //           steps: <Step>[
+  //             Step(
+  //               isActive: _index >= 0,
+  //               title: const Text('Descrição'),
+  //               content: Column(
+  //                 children: [
+  //                         const Text('INFORMAÇÕES DO CLIENTE', 
+  //                         style: TextStyle(
+  //                                 fontSize: 20,
+  //                                 fontWeight: FontWeight.bold,
+  //                                 ),
+  //                         ),
+  //                       Row( 
+  //                         mainAxisAlignment: MainAxisAlignment.center,
+  //                         children: [                               
+  //                           SizedBox(height: 20,),
+  //                           Text('Cliente não se encontra', style: textSize,),
+  //                           Checkbox(
+  //                               value: isChecked,
+  //                               onChanged: (bool? value ) {
+  //                                 setState(() {
+  //                                   isChecked = value!;
+  //                                   _index = 3;
+  //                                 });
+  //                               }),
+  //                           ]
+  //                         ),
+  //                       descriptionEntrega(data: _data,item: _item, value: {}),
+  //                 ]
+  //               ),
+  //               state: _index > 0 ? StepState.complete : StepState.disabled
+  //             ),
+  //             Step(
+  //               isActive: _index >= 1,
+  //               title: Text('Assinatura'),
+  //               content: SignatureEntrega(data: _dataform, value:  {} ),
+  //               state: _index > 1 ? StepState.complete : StepState.disabled
+  //             ),
+  //             Step(
+  //               isActive: _index >= 2,
+  //               title: const Text('Foto'),
+  //               content: Container(
+  //                 alignment: Alignment.centerLeft,
+  //                 child:PictureEntrega(data: _dataform,  value:  {}),
+  //               ),
+  //               state: _index > 2 ? StepState.complete : StepState.disabled
+  //             ),
+  //             Step(
+  //               isActive: _index >= 3,
+  //               title: const Text('Enviar'),
+  //               content: Container(
+  //                 alignment: Alignment.bottomCenter,
+  //                 child: Column(
+  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                   crossAxisAlignment: CrossAxisAlignment.stretch,
+  //                   children: [
+  //                     Padding(
+  //                       padding: EdgeInsets.symmetric(
+  //                         vertical: _padding,
+  //                         horizontal: 0
+  //                       ),
+  //                       child: Column(
+  //                         children: [ 
+  //                           if (!isChecked) Container(
+  //                             child: Column(
+  //                               children: [
+  //                               Text('CHECKLIST FINAL', style: TextStyle(
+  //                                           fontSize: 20,
+  //                                           fontWeight: FontWeight.bold,
+  //                                       ),),
+  //                               Row(
+  //                                 children: [
+  //                                     _data != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+  //                                     Text('Nome Cliente' , style: textSize,) 
+  //                                 ]
+  //                               ),
+  //                               SizedBox(height: 10,),
+  //                               Row(
+  //                                 children: [
+  //                                     _dataform.cpfCnpj != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+  //                                     Text('CPF Cliente' , style: textSize,)
+  //                               ]),
+  //                               SizedBox(height: 10,),
+  //                               Row(
+  //                                 children: [
+  //                                     _dataform.assinatura != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+  //                                     Text('Assinatura Cliente' , style: textSize,)
+  //                               ]),
+  //                               SizedBox(height: 10,),
+  //                               Row(
+  //                                 children: [
+  //                                     _dataform.imagems != null  ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+  //                                     Text('${_dataform.imagems?.length} Fotos dos produtos Entregues.' , style: textSize,)
+  //                               ]),
+
+  //                               SizedBox(height: 10),
+                                
+  //                               ]
+  //                             )
+  //                           ),
+                            
+  //                           if (isChecked) Container(
+  //                             child: Column(children: [
+  //                                const Text('INSIRA UMA OBSERVAÇÃO',
+  //                                 style: TextStyle(
+  //                                           fontSize: 20,
+  //                                           fontWeight: FontWeight.bold,
+  //                                       ), ),
+  //                               SizedBox(height: 20,),
+  //                                TextFormField(
+  //                                 key: ValueKey('OBS:'),
+  //                                 maxLines: 4,
+  //                                 initialValue: _dataform.observacao,
+  //                                 onChanged: (obs) => _dataform.observacao = obs,
+  //                                 validator: (_obs) {
+  //                                   final obs = _obs ?? '';
+  //                                   if (obs.trim() != ''){
+  //                                     return 'OBS e obrigatorio!';
+  //                                   }
+  //                                 },
+  //                                 decoration: const InputDecoration(
+  //                                   labelText: 'Observação:',
+  //                                   border: OutlineInputBorder(),    
+  //                                 ),
+  //                               ),
+                               
+  //                             ]),
+                      
+  //                           ),
+  //                           // if (false) Column(
+  //                           //   children: itemsObs
+  //                           // ),
+                            
+  //                           ]
+  //                       )
+  //                     ),
+  //                     if (isChecked) Padding(
+  //                           padding: EdgeInsets.all(5),
+  //                           child: Container( 
+  //                             child : ElevatedButton.icon(
+  //                                 onPressed: _onSubmitEntrega,
+  //                                 icon: Icon(Icons.check), 
+  //                                 label: Text('Conlcuir Entrega')
+  //                               ),
+  //                             )
+  //                       ),
+  //                   ]),
+  //               ),
+  //               state: _index > 3 ? StepState.complete : StepState.disabled
+  //             ),
+  //           ],
+  //         )
+  //             )
+  //           ])
+  //       )
+  //   );
+  // }
 }

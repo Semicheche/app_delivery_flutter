@@ -28,7 +28,7 @@ class Biometry {
     } catch (e) {
       print("error biome trics $e");
     }
-    print('hasBiometric => $canCheckBiometrics');
+
     return canCheckBiometrics;
   }
 }

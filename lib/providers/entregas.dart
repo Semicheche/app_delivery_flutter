@@ -2,9 +2,9 @@ import 'package:delivery_app/models/data_entrega.dart';
 import 'package:flutter/material.dart';
 
 class Entregas with ChangeNotifier {
-  List<DataEntrega> _itemsEntregas = [];
+  List<Entrega> _itemsEntregas = [];
 
-  List<DataEntrega> get items {
+  List<Entrega> get items {
     return [..._itemsEntregas];
   }
 
@@ -12,7 +12,7 @@ class Entregas with ChangeNotifier {
     return _itemsEntregas.length;
   }
 
-  DataEntrega itemByIndex(int index) {
+  Entrega itemByIndex(int index) {
     return _itemsEntregas[index];
   } 
 }

@@ -29,21 +29,25 @@ class _LoginAuthState extends State<LoginAuth> {
   }
 
   Future<void> checkBiometry() async{
+
      Biometry bio = Biometry();
      AuthSaveCredentials _credentials = AuthSaveCredentials();
 
     if (await bio.activeBiometry()){
-      print('Tem Biometria Ativa');
 
       bool authLocal =  await bio.authenticate();
-
       if (authLocal){
         var email = await _credentials.getByKey('email');
         var password = await _credentials.getByKey('password');
+        setState(() => _isLoading = !_isLoading);
+        
+        
         AuthService().login(email!, password!);
+        
+      }else {
+        return;
       }
-
-    }
+    }    
   }
 
   Future<void> _handleSubmit(AuthFormData authData) async {
@@ -114,13 +118,21 @@ class _LoginAuthState extends State<LoginAuth> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: Stack(
+      body: 
+      Focus(
+        onFocusChange: (hasFocus) {
+          if (hasFocus){
+            checkBiometry();
+          }
+        },
+        child: Stack(
         children: [
           Center(
             child: SingleChildScrollView(
               child: AuthForm(onSubmit: _handleSubmit),
             )
           ),
+          
           if (_isLoading) Container(
             decoration: BoxDecoration(
               color: Color.fromRGBO(0, 0, 0, 0.5)
@@ -131,6 +143,7 @@ class _LoginAuthState extends State<LoginAuth> {
           ),
         ],
       )
+      ),
     );
   }
 }

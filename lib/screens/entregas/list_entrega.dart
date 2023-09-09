@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'package:badges/badges.dart' as badges;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery_app/models/data_entrega.dart';
 import 'package:delivery_app/screens/entregas/stepper_entrega.dart';
 import 'package:delivery_app/screens/laoding_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,20 +29,12 @@ class _ListEntregaState extends State<ListEntrega> {
     final entregas = {};
     var entregador;
     User? currentUser = FirebaseAuth.instance.currentUser;
-    await FirebaseFirestore.instance.collection('entregas').get().then((value){
-      print('entregas Realizdas');
+  
+    await FirebaseFirestore.instance.collection("entregas").orderBy("criadoEm").get().then((value){
       value.docs.forEach((element) {
         var _entregasFeitas = element.data();
         
-        if (!entregasRealizada.keys.contains(_entregasFeitas['idEntrega'])){
-          print('primeiro');
-          print(_entregasFeitas);
-          entregasRealizada[_entregasFeitas['idEntrega']] = [_entregasFeitas];
-        }else if (entregasRealizada.keys.contains(_entregasFeitas['idEntrega'])){
-          print('segundo');
-          print(_entregasFeitas);
-          entregasRealizada[_entregasFeitas['idEntrega']].add(_entregasFeitas);
-        }
+        print(_entregasFeitas);
         
       }); 
     });
@@ -53,9 +46,9 @@ class _ListEntregaState extends State<ListEntrega> {
       (value) async { 
         entregador = value.docs != null ? value.docs[0].data() : null;
         
-        data['entregas'].forEach((k, v) {
+        data['entregas'].forEach((k, v) async {
           if (v["entregador"].toString() == entregador['idEntregador']) {
-            entregas[k] = v;            
+            entregas[k] = v;     
           }
 
         });
@@ -83,19 +76,17 @@ class _ListEntregaState extends State<ListEntrega> {
         entregasRealizada[nrEntrega].forEach((items){
           if (items['cpfCnpj'] != null && items['assinaturaURL'] != ''){
             concluido = true;
-          }
+        }
         });
       }
     }
    
-    return badges.Badge(
-                    badgeContent: Text('$count', style: TextStyle(color: Colors.white,),),
-                    position: badges.BadgePosition.topEnd(top: 0, end: 0),
-                    child: IconButton(
-                      icon: concluido ? Icon(Icons.checklist_rounded, color: Colors.green.shade500) : Icon(Icons.pending_actions_sharp),
-                      onPressed: () {},
-                    ),
-                  ); 
+    return IconButton(
+      icon: concluido 
+      ? Icon(Icons.checklist_rtl, color: Colors.green.shade500) 
+      : Icon(Icons.pending_actions_sharp),
+      onPressed: () {},
+      );
   }
  
   @override
@@ -107,12 +98,14 @@ class _ListEntregaState extends State<ListEntrega> {
     }
 
     List<Widget> _items = [];
+    var entrega;
+
     _entregas.forEach((key, value) {
-       _items.add(Container(
+      _items.add(Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black,
-                      width: 0.5,
+                      color: const Color.fromARGB(255, 117, 117, 117),
+                      width: 0.3,
                     )
                   ),
                   child: ListTile(
@@ -137,10 +130,10 @@ class _ListEntregaState extends State<ListEntrega> {
                   subtitle: Text('\n Obs: ${value["doctos"][0]["obs"]}'),
                   onTap: () {
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) => StepperEntrega(item: value)),
-                    );
+                      MaterialPageRoute(builder: (BuildContext context) => StepperEntrega(item: value),
+                    ));
                   },
-                  leading: getIconList(value['nrEntrega']),
+                  //leading: //getIconListStatus(value['nrEntrega']) ///getIconList(value['nrEntrega']),
                   trailing: getIconListStatus(value['nrEntrega'])
                   // const Icon(Icons.pending_actions_sharp),
                   ),

@@ -15,7 +15,7 @@ class LoadingPositionPage extends StatelessWidget {
                 backgroundColor: Colors.white,
               ),
               SizedBox(height: 10),
-              Text("Salvando Imagems...", 
+              Text("Salvando Imagens...", 
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20

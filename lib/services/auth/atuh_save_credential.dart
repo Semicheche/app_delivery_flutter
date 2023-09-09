@@ -14,8 +14,6 @@ class AuthSaveCredentials {
 
   Future<void> getAll() async {
     final valor = await _storage.readAll(aOptions: _getAndroidOptions());
-
-    print(valor);
   }
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(

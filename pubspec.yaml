@@ -82,6 +82,7 @@ flutter:
     - assets/images/delivery-man1.png
     - assets/images/delivery-man.png
     - assets/imparfm-default-rtdb-export.json
+    - assets/images/pngwing.com.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

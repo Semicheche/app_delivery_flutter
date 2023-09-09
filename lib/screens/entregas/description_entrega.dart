@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class descriptionEntrega extends StatefulWidget {
   final data;
   final item;
+  final value;
 
   const descriptionEntrega
   ({super.key,
   required this.data,
-  required this.item });
+  required this.item,
+  required this.value });
 
   @override
   State<descriptionEntrega> createState() => _descriptionEntregaState();
@@ -22,7 +25,9 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
   Widget build(BuildContext context) {
     var _dataform = widget.data;
     var _item = widget.item;
+    var _value = widget.value;
     List _produtos = _item["doctos"][0]["produtos"];
+    print(_dataform);
 
     return Column(
                   children: [
@@ -32,11 +37,12 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                               children: [
                                 Container(
                                   child: Column(
-                                    children: [                            
+                                    children: [                
                                 if (!isChecked) TextFormField(
                                   key: ValueKey('name'),
-                                  initialValue: _dataform.name,
-                                  onChanged: (name) => _dataform.name = name,
+                                  initialValue: _dataform?.name,
+                                  onChanged: (name) => _dataform?.name = name,
+                                  readOnly: _value['name'] != null &&  _value['name'] != '',
                                   validator: (_name) {
                                     final nome = _name ?? '';
                                     if (nome.length < 3){
@@ -51,9 +57,10 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                 SizedBox(height: 10,),
                                 if (!isChecked) TextFormField(
                                   key: ValueKey('cpfCnpj'),
-                                  initialValue: _dataform.cpfCnpj,
-                                  onChanged: (cpfCnpj) => _dataform.cpfCnpj = cpfCnpj,
+                                  initialValue: _value['cpfCnpj'] != null ? _value['cpfCnpj'] :  _dataform?.cpfCnpj,
+                                  onChanged: (cpfCnpj) => _dataform?.cpfCnpj = cpfCnpj,
                                   keyboardType: TextInputType.number,
+                                  readOnly: _value['cpfCnpj'] != '' && _value['cpfCnpj'] != null,
                                   validator: (_cpfCnpj) {
                                     final cpfCnpj = _cpfCnpj ?? '';
                                     if (cpfCnpj.length < 11){
@@ -69,6 +76,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                               ),
                                 
                                 const SizedBox(height: 20),
+                                 
                                  Container(
                                     decoration:  BoxDecoration(
                                     color: Colors.amber.shade50,
@@ -79,20 +87,24 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                     ),
                                     child: Column(
                                     children: [
-                                      const SizedBox(height:20),
+                                      if (_value['name'] == null) const SizedBox(height:20),
                                       Text('DETALHES DA ENTREGA', style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                     ),
                                     ),
-                                    const SizedBox(height:20),
+                                    if (_value['name'] != null && _value['name'] != '') Image.asset('assets/images/pngwing.com.png', width: 200, height: 100, fit: BoxFit.fitWidth,), 
+                                    if (_value['name'] != null && _value['name'] != '') Text('ENTREGA EFEUTADA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(_value['criadoEm']))}', style: TextStyle(color: Colors.red.shade800 , fontSize: 17), ),
+                                    if (_value['name'] == '') Text('TENTATIVA DE ENTREGA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(_value['criadoEm']))}', style: TextStyle(color: Colors.red.shade800 , fontSize: 15), ),
+                                    if (_value['name'] != null)const SizedBox(height:20),
+
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     const SizedBox(width: 10),
                                     Text('FILIAL: ${_item["doctos"][0]["codFilial"]}', style: textSize),
                                     const SizedBox(width: 10),
-                                    Text('Nº DOCUMENTO: ${_item["doctos"][0]["nrDocto"]}', style: textSize,),
+                                    Text('Nº DOCUMENTO: ${_item["doctos"][0]["nrDocto"]}', style: textSize,),         
                                 ]),
                                 
 

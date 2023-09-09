@@ -7,10 +7,12 @@ import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 class SignatureEntrega extends StatefulWidget {
   final data;
+  final value;
 
   const SignatureEntrega({
     super.key,
-    required this.data
+    required this.data,
+    required this.value
   });
 
   @override
@@ -21,12 +23,12 @@ class _SignatureEntregaState extends State<SignatureEntrega> {
   final GlobalKey<SfSignaturePadState> signatureGlobalKey = GlobalKey();
   Uint8List? img = null;
 
-  void _handleClearButtonPressed() {
+  void _handleClearButtonPressed() async{
+    print('CLICK');
 
     signatureGlobalKey.currentState!.clear();   
-    print('aqui');
+
     
-    print(widget.data.assinatura);
     setState(() {
       img = null;
       widget.data.assinatura = null;
@@ -49,46 +51,66 @@ class _SignatureEntregaState extends State<SignatureEntrega> {
   @override
   Widget build(BuildContext context) {
     var data = widget.data;
-    return  Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-                Text('Assinatura '),
-                Text('${data.name} - ${data.cpfCnpj}', style: TextStyle(fontSize: 17),),
-                if (img == null) Padding(
-                    padding: EdgeInsets.all(1),
-                    child: Container(
-                        height: 460,
-                        child: SfSignaturePad(
-                            key: signatureGlobalKey,
-                            backgroundColor: Colors.white,
-                            strokeColor: Colors.black,
-                            minimumStrokeWidth: 1.0,
-                            maximumStrokeWidth: 4.0
-                          ),
-                        decoration:
-                            BoxDecoration(border: Border.all(color: Colors.grey)
+    var _ass = widget.value;
+ 
+    if (_ass['assinaturaURL'] != null && _ass['assinaturaURL'] != ''){
+      return  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                  SizedBox(height: 10), 
+                  Container(
+                          child: Image.network(_ass['assinaturaURL'])
+                        ),
+                ]
+      );
+
+    }else{
+      return  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                 Text('Assinatura '),
+                 Text('${data.name} - ${data.cpfCnpj}', style: TextStyle(fontSize: 17),),
+                 Stack(
+                  children : [
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Container(
+                            height: 460,
+                            child: SfSignaturePad(
+                                key: signatureGlobalKey,
+                                backgroundColor: Colors.white,
+                                strokeColor: Colors.black,
+                                minimumStrokeWidth: 1.0,
+                                maximumStrokeWidth: 4.0
+                              ),
+                            decoration:
+                                BoxDecoration(border: Border.all(color: Colors.grey)
+                        )
+                      )
+                    ),
+                    const SizedBox(height: 10), 
+                    if (img != null) Container(
+                        child: Image.memory(img!)
+                      ),
+                    
+                  ]),
+                  Row(
+                      children: <Widget>[
+                      TextButton(
+                        child: Text('Salvar'),
+                        onPressed: _handleSaveButtonPressed,
+                      ),
+                      TextButton(
+                        child: Text('Apagar'),
+                        onPressed: _handleClearButtonPressed,
+                      )
+                    ], 
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly
                     )
-                  )
-                ),
-                const SizedBox(height: 10), 
-                                 if (img != null) Container(
-                                    child: Image.memory(img!)
-                                  ),
-                Row(
-                  children: <Widget>[
-                  TextButton(
-                    child: Text('Salvar'),
-                    onPressed: _handleSaveButtonPressed,
-                  ),
-                  TextButton(
-                    child: Text('Apagar'),
-                    onPressed: _handleClearButtonPressed,
-                  )
-                ], 
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly
-                )
-              ]);
+      ]);
+    }
   }
 }
 
