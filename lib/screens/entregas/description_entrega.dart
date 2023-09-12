@@ -1,16 +1,16 @@
+import 'package:delivery_app/models/data_entrega.dart';
+import 'package:delivery_app/screens/entregas/stepper_entrega.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class descriptionEntrega extends StatefulWidget {
   final data;
   final item;
-  final value;
 
   const descriptionEntrega
   ({super.key,
   required this.data,
-  required this.item,
-  required this.value });
+  required this.item});
 
   @override
   State<descriptionEntrega> createState() => _descriptionEntregaState();
@@ -21,14 +21,15 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
   var textSizeProduct =  TextStyle(fontSize: 15);
   bool isChecked = false;
 
+  
+
   @override
   Widget build(BuildContext context) {
-    var _dataform = widget.data;
+    var _data = widget.data;
     var _item = widget.item;
-    var _value = widget.value;
-    List _produtos = _item["doctos"][0]["produtos"];
-    print(_dataform);
 
+    List _produtos = _item["doctos"][0]["produtos"];
+  print('is valid ${_data.isValid()}');
     return Column(
                   children: [
                     Container(
@@ -40,9 +41,11 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                     children: [                
                                 if (!isChecked) TextFormField(
                                   key: ValueKey('name'),
-                                  initialValue: _dataform?.name,
-                                  onChanged: (name) => _dataform?.name = name,
-                                  readOnly: _value['name'] != null &&  _value['name'] != '',
+                                  initialValue: _data?.name != null ? _data?.name : '',
+                                  onChanged: (name) => setState(() {
+                                    _data?.name = name;
+                                  }),
+                                  enabled: !_data.isValid(),
                                   validator: (_name) {
                                     final nome = _name ?? '';
                                     if (nome.length < 3){
@@ -57,10 +60,10 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                 SizedBox(height: 10,),
                                 if (!isChecked) TextFormField(
                                   key: ValueKey('cpfCnpj'),
-                                  initialValue: _value['cpfCnpj'] != null ? _value['cpfCnpj'] :  _dataform?.cpfCnpj,
-                                  onChanged: (cpfCnpj) => _dataform?.cpfCnpj = cpfCnpj,
+                                  initialValue: _data?.cpfCnpj != null ? _data?.cpfCnpj : '',
+                                  onChanged: (cpfCnpj) => _data.cpfCnpj = cpfCnpj,
                                   keyboardType: TextInputType.number,
-                                  readOnly: _value['cpfCnpj'] != '' && _value['cpfCnpj'] != null,
+                                  enabled: !_data.isValid(),
                                   validator: (_cpfCnpj) {
                                     final cpfCnpj = _cpfCnpj ?? '';
                                     if (cpfCnpj.length < 11){
@@ -87,16 +90,16 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                     ),
                                     child: Column(
                                     children: [
-                                      if (_value['name'] == null) const SizedBox(height:20),
+                                      if (_data?.name == null) const SizedBox(height:20),
                                       Text('DETALHES DA ENTREGA', style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                     ),
                                     ),
-                                    if (_value['name'] != null && _value['name'] != '') Image.asset('assets/images/pngwing.com.png', width: 200, height: 100, fit: BoxFit.fitWidth,), 
-                                    if (_value['name'] != null && _value['name'] != '') Text('ENTREGA EFEUTADA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(_value['criadoEm']))}', style: TextStyle(color: Colors.red.shade800 , fontSize: 17), ),
-                                    if (_value['name'] == '') Text('TENTATIVA DE ENTREGA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(_value['criadoEm']))}', style: TextStyle(color: Colors.red.shade800 , fontSize: 15), ),
-                                    if (_value['name'] != null)const SizedBox(height:20),
+                                    if (_data.isValid()) Image.asset('assets/images/pngwing.com.png', width: 200, height: 100, fit: BoxFit.fitWidth,), 
+                                    if (_data.isValid()) Text('ENTREGA EFEUTADA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(_data?.criadoEm != null ? _data?.criadoEm : DateTime.now())}', style: TextStyle(color: Colors.red.shade800 , fontSize: 17), ),
+                                    if (_data.observations.length > 0) Text('TENTATIVA DE ENTREGA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(_data?.criadoEm)}', style: TextStyle(color: Colors.red.shade800 , fontSize: 15), ),
+                                    if (_data?.name != null)const SizedBox(height:20),
 
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,

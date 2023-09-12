@@ -3,6 +3,7 @@ import 'package:badges/badges.dart' as badges;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/models/data_entrega.dart';
+import 'package:delivery_app/screens/entregas/firabase_service_entrega.dart';
 import 'package:delivery_app/screens/entregas/stepper_entrega.dart';
 import 'package:delivery_app/screens/laoding_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +22,7 @@ class ListEntrega extends StatefulWidget {
 
 class _ListEntregaState extends State<ListEntrega> {
   var _entregas = {};
+  var entrega;
   var entregasRealizada = {};
 
   Future<void> readjson() async {
@@ -66,27 +68,27 @@ class _ListEntregaState extends State<ListEntrega> {
     }
   }
 
-  Widget getIconListStatus(int nrEntrega) {
-    var count = 0;
-    bool concluido = false;
-    if (entregasRealizada[nrEntrega] != null){
-      
-      count = entregasRealizada[nrEntrega].length;
-      if (count > 0){
-        entregasRealizada[nrEntrega].forEach((items){
-          if (items['cpfCnpj'] != null && items['assinaturaURL'] != ''){
-            concluido = true;
-        }
-        });
-      }
-    }
-   
+  Widget getIconListStatus(entrega) {
+    print(entrega);
+    var concluido = entrega != null ? entrega.isValid() : false;
     return IconButton(
-      icon: concluido 
+      icon: concluido
       ? Icon(Icons.checklist_rtl, color: Colors.green.shade500) 
       : Icon(Icons.pending_actions_sharp),
       onPressed: () {},
       );
+  }
+
+
+  Future<Entrega> firebaseCallAsync(int nrEntrega) async{
+    var _data;
+
+    _data = await FirebaseServiceEntrega().getCollection('entregas_concluidas', 'idEntrega', '==', nrEntrega);
+
+    _data = _data ?? Entrega( '', null, null, null, null, null, null, null, null, null, null, 0,[]);
+
+    
+    return _data;
   }
  
   @override
@@ -128,13 +130,14 @@ class _ListEntregaState extends State<ListEntrega> {
                       ],
                     ),
                   subtitle: Text('\n Obs: ${value["doctos"][0]["obs"]}'),
-                  onTap: () {
+                  onTap: () async {
+                    entrega = await firebaseCallAsync(value['nrEntrega']);
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) => StepperEntrega(item: value),
+                      MaterialPageRoute(builder: (BuildContext context) => StepperEntrega(item: value, entrega: entrega),
                     ));
                   },
                   //leading: //getIconListStatus(value['nrEntrega']) ///getIconList(value['nrEntrega']),
-                  trailing: getIconListStatus(value['nrEntrega'])
+                  trailing: getIconListStatus(entrega)
                   // const Icon(Icons.pending_actions_sharp),
                   ),
                 ),

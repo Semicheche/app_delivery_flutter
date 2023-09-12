@@ -7,12 +7,10 @@ import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 class SignatureEntrega extends StatefulWidget {
   final data;
-  final value;
 
   const SignatureEntrega({
     super.key,
     required this.data,
-    required this.value
   });
 
   @override
@@ -24,8 +22,6 @@ class _SignatureEntregaState extends State<SignatureEntrega> {
   Uint8List? img = null;
 
   void _handleClearButtonPressed() async{
-    print('CLICK');
-
     signatureGlobalKey.currentState!.clear();   
 
     
@@ -51,16 +47,14 @@ class _SignatureEntregaState extends State<SignatureEntrega> {
   @override
   Widget build(BuildContext context) {
     var data = widget.data;
-    var _ass = widget.value;
- 
-    if (_ass['assinaturaURL'] != null && _ass['assinaturaURL'] != ''){
+    if (data?.assinaturaUrl != null && data?.assinaturaUrl != ''){
       return  Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                   SizedBox(height: 10), 
                   Container(
-                          child: Image.network(_ass['assinaturaURL'])
+                          child: Image.network(data?.assinaturaUrl)
                         ),
                 ]
       );
@@ -71,13 +65,13 @@ class _SignatureEntregaState extends State<SignatureEntrega> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                  Text('Assinatura '),
-                 Text('${data.name} - ${data.cpfCnpj}', style: TextStyle(fontSize: 17),),
+                 Text('${data?.name} - ${data?.cpfCnpj}', style: TextStyle(fontSize: 17),),
                  Stack(
                   children : [
                     Padding(
                         padding: EdgeInsets.all(1),
                         child: Container(
-                            height: 460,
+                            height: 450,
                             child: SfSignaturePad(
                                 key: signatureGlobalKey,
                                 backgroundColor: Colors.white,

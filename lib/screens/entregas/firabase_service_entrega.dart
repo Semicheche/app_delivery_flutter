@@ -14,18 +14,17 @@ class FirebaseServiceEntrega {
 
   Future getCollection(String collection, String field, String condiction, int value) async {
      return await FirebaseFirestore.instance
-      .collection("entregas")
+      .collection("entregas_concluidas")
+      .withConverter(
+        fromFirestore: Entrega.fromFirestore, 
+        toFirestore: (Entrega entrega, _) => entrega.toFirestore())
       .where("idEntrega", isEqualTo: value).get().then((value) {
-        print(value.docs);
         var result = value.docs.length > 0 ? value.docs[0].data() : null;
-        print('result');
-        print(result);
-         return result;
+
+        print('AQUI GET COLLECTION');
+        print(result?.assinaturaUrl);
+        return result;
       });
-    
-      // print('object');
-      // print(result);
-      // return result;
     
   }
 
@@ -33,11 +32,15 @@ class FirebaseServiceEntrega {
     var resp =  'ocrrreu um Erro';
 
     // if (dataEntrega.assinatura != null && dataEntrega.imagems!.length > 0){
-      if (dataEntrega.observacao != ''){
+      if (dataEntrega.observacao != null){
         dataEntrega.observations.add({
           'idEntregador': dataEntrega.idEntregador.toString(),
           'criadoEm': dataEntrega.criadoEm?.toIso8601String(),
           'observacao': dataEntrega.observacao,
+          'geolocation':  {
+            'latitude': dataEntrega.location!.lat,
+            'longitude': dataEntrega.location!.lon,
+          },
         });
       }
 
@@ -49,8 +52,8 @@ class FirebaseServiceEntrega {
             'latitude': dataEntrega.location!.lat,
             'longitude': dataEntrega.location!.lon,
           },
-          'assinaturaURL': dataEntrega.assinaturaUrl, 
-          'imagemsURL': dataEntrega.imagemsURL,
+          'assinaturaUrl': dataEntrega.assinaturaUrl, 
+          'imagens': dataEntrega.imagens,
           'idEntrega': dataEntrega.idEntrega,
           'observacao': dataEntrega.observacao,
           'criadoEm': dataEntrega.criadoEm?.toIso8601String(),
@@ -59,34 +62,12 @@ class FirebaseServiceEntrega {
           'observations': dataEntrega.observations
         };
 
-        _firestore.collection('entregas').add(map);
+        _firestore.collection('entregas_concluidas').add(map);
         
         resp = 'Entrega gravada com Sucesso';
       }catch(err){
         print('Error ao persister entregas: $err');
       }
-
-    // }else {
-    //    try{
-    //     _firestore.collection('entregas').add({ 
-    //       'name': '', 
-    //       'cpfCnpj': '', 
-    //       'location': {
-    //         'latitude': dataEntrega.location!.lat,
-    //         'longitude': dataEntrega.location!.lon,
-    //       },
-    //       'assinaturaURL':'', 
-    //       'imagemsURL': dataEntrega.imagemsURL,
-    //       'idEntrega': dataEntrega.idEntrega,
-    //       'observacao': dataEntrega.observacao,
-    //       'criadoEm': dataEntrega.criadoEm?.toIso8601String(),
-    //       'alteradoEm': dataEntrega.alteradoEm?.toIso8601String(),
-    //       'idEntregador': dataEntrega.idEntregador.toString(),
-    //     });
-    //   }catch(err){
-    //     print('Error ao persister entregas OBSERVACOA: $err');
-    //   }
-    // }
 
     return resp;
   }

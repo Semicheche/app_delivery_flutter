@@ -23,12 +23,12 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class StepperEntrega extends StatefulWidget {
   var item;
-  // var entrega;
+  var entrega;
 
   StepperEntrega({
     Key? key, 
     required this.item,
-    // this.entrega
+    this.entrega
     }) : super(key: key);
 
   @override
@@ -43,7 +43,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
 
 
   
-  late Entrega _dataform;
+  var _data;
   var data;
   LocationData? _locationData = null;
   double _padding = 190;
@@ -74,7 +74,8 @@ class _StepperEntregasState extends State<StepperEntrega> {
   
 
   void _onSubmitEntrega() async {
-    if (isChecked && _dataform.observacao == ''){
+    _data = widget.entrega;
+    if (isChecked && _data.observacao == ''){
       showTopSnackBar(
         Overlay.of(context), 
         CustomSnackBar.error(message: 'insira uma observação!'),
@@ -87,44 +88,37 @@ class _StepperEntregasState extends State<StepperEntrega> {
       );
     }
     await _getCurrentLocation();
-    final LocationEntrega? localizacao = getLocation();
+    final LocationEntrega localizacao = getLocation();
 
-    Entrega _dataSubmit = Entrega(
-      '',
-      isChecked ? null : _dataform.name, 
-      isChecked ? null : _dataform.cpfCnpj,
-      localizacao,
-      isChecked ? null : _dataform.assinatura, 
-      isChecked ? [] : _dataform.imagems, 
-      [],
-      _dataform.idEntrega,
-      _dataform.observacao,
-      DateTime.now(),
-      DateTime.now(),
-      _dataform.idEntregador,
-      []
-      );
+    _data.location = localizacao;
+    _data.criadoEm = _data.criadoEm ?? DateTime.now();
+    _data.alteradoEm = DateTime.now();
+
     
-    if (_dataSubmit != null) {
+    if (_data != null) {
       List listUrls = [];
       var assinaturaUrl;
-      var folder = 'entregas/${_dataSubmit?.idEntrega}';
+      var folder = 'entregas_concluidas/${_data?.idEntrega}';
       
       Navigator.push(context,
         MaterialPageRoute(builder: (context) => LoadingSavePage()),
       );
 
-      if (_dataSubmit.assinatura != null){
-        assinaturaUrl = await StorageFile().uploadImageMemoryToStorage('$folder/assinatura', _dataSubmit.assinatura as Uint8List);
+      if (_data.assinatura != null){
+        assinaturaUrl = await StorageFile().uploadImageMemoryToStorage('$folder/assinatura', _data.assinatura as Uint8List);
       }
-      listUrls = await StorageFile().uploadImageFileToStorage(folder, _dataSubmit.imagems);
 
-      _dataSubmit.assinaturaUrl = assinaturaUrl;
-      _dataSubmit.imagemsURL = listUrls;
+      if (_data.imagens != null){
+        listUrls = await StorageFile().uploadImageFileToStorage(folder, _data.imagens);
+      }
+
+      _data.assinaturaUrl = assinaturaUrl;
+      _data.imagens = listUrls;
       
-      FirebaseServiceEntrega().saveEntrega(_dataSubmit);
-
-      Navigator.pop(context);
+      FirebaseServiceEntrega().saveEntrega(_data);
+      if (_data.imagens != null) {
+        Navigator.pop(context);
+      }
       Navigator.pop(context);
       Navigator.pop(context);
 
@@ -136,25 +130,258 @@ class _StepperEntregasState extends State<StepperEntrega> {
 
   }
 
-
-
-  @override
-  void initState(){
-
+  List<Widget> listObservations(){
+    List<Widget> list = [];
+    widget.entrega.observations.forEach((obs){
+        list.add( Container(
+              decoration: BoxDecoration(
+                color:  Colors.amber.shade50,
+                border: Border.all(
+                  color: Colors.black45,
+                  width: 0.8)
+              ),
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [ Text('Observação', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text('${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(obs["criadoEm"]))}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                   ]),
+                  Text('${obs["observacao"]}', style: TextStyle(fontSize: 17)),
+                  
+                ],
+              ),
+            ),
+           
+        );
+      });
+    return list;
   }
 
-  Future<Map<String, dynamic>> firebaseCallAsync(int nrEntrega) async{
-    print(nrEntrega);
-    data = await FirebaseServiceEntrega().getCollection('entregas', 'idEntrega', '==', nrEntrega);
-    print(data);
-    return data;
-  }
 
   @override
   Widget build(BuildContext context) {
+     var textSize =  TextStyle(fontSize: 17);
      var _item = widget.item;
-    
-      Widget deafaultTemplate(AsyncSnapshot snapshot){
+     var entrega = widget.entrega;
+        
+         Widget display(_data){
+          _data.idEntregador = _item['entregador'];
+          _data.idEntrega = _item['nrEntrega'];
+          return Container(
+          child: Column(
+            children: [
+              Expanded(
+                child: Stepper(
+            type: StepperType.horizontal,
+            currentStep: _index,
+            onStepCancel: () {
+              if (_index > 0) {
+                setState(() {
+                  if (isChecked) {
+                    _index -= 3;
+                    isChecked = false;
+                  }else{
+                    _index -= 1;
+                  }
+                });
+              }
+            },
+            onStepContinue: () {
+              if (_index <= 2) {
+                setState(() {
+                  _index += 1;
+                });
+              }
+            },
+            onStepTapped: (int index) {
+              setState(() {
+                _index = index;
+              });
+            },
+            controlsBuilder: (BuildContext context, ControlsDetails details) {
+              return Container(
+                margin: EdgeInsets.only(top: 50),
+                child: Row(
+                  children: [
+                    if ( _index < 3)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: details.onStepContinue,
+                          child: Text('Proximo' ),
+                          )
+                        ),
+                      SizedBox(width: 12,),
+                    if (_index != 0 && (_index < 3 || _data?.isValid()))
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: details.onStepCancel,
+                          child: Text('Voltar'),
+                          )
+                      ),
+                  ],
+                ),
+              );
+            },
+            steps: <Step>[
+              Step(
+                isActive: _index >= 0,
+                title: const Text('Detalhes'),
+                content: Column(
+                  children: [
+                          const Text('INFORMAÇÕES DO CLIENTE', 
+                          style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  ),
+                          ),
+                        Row( 
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [                               
+                            SizedBox(height: 20,),
+                            if (!_data.isValid()) Text('Cliente não se encontra', style: textSize,),
+                            if (!_data.isValid()) Checkbox(
+                                value: isChecked,
+                                onChanged: (bool? value ) {
+                                  setState(() {
+                                    isChecked = value!;
+                                    _index = 3;
+                                  });
+                                }),
+                            ]
+                          ),
+                        descriptionEntrega(data: _data, item: _item),
+                  ]
+                ),
+                state: _index > 0 ? StepState.complete : StepState.disabled
+              ),
+              Step(
+                isActive: _index >= 1,
+                title: Text('Assinatura'),
+                content: SignatureEntrega(data: _data),
+                state: _index > 1 ? StepState.complete : StepState.disabled
+              ),
+              Step(
+                isActive: _index >= 2,
+                title: const Text('Foto'),
+                content: Container(
+                  alignment: Alignment.centerLeft,
+                  child: PictureEntrega(data: _data),
+                ),
+                state: _index > 2 ? StepState.complete : StepState.disabled
+              ),
+              Step(
+                isActive: _index >= 3,
+                title: const Text('Enviar'),
+                content: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: _padding,
+                          horizontal: 0
+                        ),
+                        child: Column(
+                          children: [ 
+                            if (!isChecked) Container(
+                              child: Column(
+                                children: [
+                                Text('CHECKLIST FINAL', style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                        ),),
+                                Row(
+                                  children: [
+                                      _data?.name != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+                                      Text('Nome Cliente' , style: textSize,) 
+                                  ]
+                                ),
+                                SizedBox(height: 10,),
+                                Row(
+                                  children: [
+                                      _data.cpfCnpj != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+                                      Text('CPF Cliente' , style: textSize,)
+                                ]),
+                                SizedBox(height: 10,),
+                                Row(
+                                  children: [
+                                      _data.assinaturaUrl != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+                                      Text('Assinatura Cliente' , style: textSize,)
+                                ]),
+                                SizedBox(height: 10,),
+                                Row(
+                                  children: [
+                                      _data.imagens != null  ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+                                      Text('${_data.imagens != null ? 0 : _data.imagens} Fotos dos produtos Entregues.' , style: textSize,)
+                                ]),
+
+                                SizedBox(height: 10),
+                                
+                                ]
+                              )
+                            ),
+                            
+                            if (isChecked) Container(
+                              child: Column(children: [
+                                 const Text('INSIRA UMA OBSERVAÇÃO',
+                                  style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                        ), ),
+                                SizedBox(height: 20,),
+                                 TextFormField(
+                                  key: ValueKey('OBS:'),
+                                  maxLines: 4,
+                                  initialValue: _data.observacao,
+                                  onChanged: (obs) => _data.observacao = obs,
+                                  validator: (_obs) {
+                                    final obs = _obs ?? '';
+                                    if (obs.trim() != ''){
+                                      return 'OBS e obrigatorio!';
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                    labelText: 'Observação:',
+                                    border: OutlineInputBorder(),    
+                                  ),
+                                ),
+                               
+                              ]),
+                      
+                            ),
+                            if (_data?.observations.length > 0) Column(
+                               children: listObservations().toList()
+                             ),
+                            
+                            ]
+                        )
+                      ),
+                      if (isChecked || (_data.name != null && _data.cpfCnpj != null && _data.assinatura != null)) Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Container( 
+                              child : ElevatedButton.icon(
+                                  onPressed: _onSubmitEntrega,
+                                  icon: Icon(Icons.check), 
+                                  label: Text('Conlcuir Entrega')
+                                ),
+                              )
+                        ),
+                    ]),
+                ),
+                state: _index > 3 ? StepState.complete : StepState.disabled
+              ),
+            ],
+          )
+              )
+            ])
+        );
+        }
+
         return Scaffold(
             appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColor,
@@ -164,27 +391,11 @@ class _StepperEntregasState extends State<StepperEntrega> {
           centerTitle: true,
           elevation: 3,
         ), body: Center(
-                  child: Text('AQUI ${snapshot.data} '),
+                  child: display(entrega),
                     )
           );
-      }
-    
-
-     return FutureBuilder(
-      future: firebaseCallAsync(_item['nrEntrega']), 
-      builder: (context, AsyncSnapshot snapshot) {
-        print(snapshot.connectionState);
-        if (snapshot.connectionState == ConnectionState.waiting){
-          return LoadingPage();
-        }else if (snapshot.hasError){
-          return deafaultTemplate(snapshot);
-        }else{
-
-          return  deafaultTemplate(snapshot);
-        }
-      });
+      
   }
-
 
 
   // @override
@@ -193,7 +404,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
   //   var _entrega = null;
   //   var textSize =  TextStyle(fontSize: 17);
   //   var itemsObs = [];
-  //   var _dataform = Entrega( '', null, null, null, null, null, [], null, null, null, null, 0,[]);
+  //   var _data = Entrega( '', null, null, null, null, null, [], null, null, null, null, 0,[]);
  
 
   //   return Scaffold(
@@ -296,7 +507,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
   //             Step(
   //               isActive: _index >= 1,
   //               title: Text('Assinatura'),
-  //               content: SignatureEntrega(data: _dataform, value:  {} ),
+  //               content: SignatureEntrega(data: _data, value:  {} ),
   //               state: _index > 1 ? StepState.complete : StepState.disabled
   //             ),
   //             Step(
@@ -304,7 +515,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
   //               title: const Text('Foto'),
   //               content: Container(
   //                 alignment: Alignment.centerLeft,
-  //                 child:PictureEntrega(data: _dataform,  value:  {}),
+  //                 child:PictureEntrega(data: _data,  value:  {}),
   //               ),
   //               state: _index > 2 ? StepState.complete : StepState.disabled
   //             ),
@@ -340,20 +551,20 @@ class _StepperEntregasState extends State<StepperEntrega> {
   //                               SizedBox(height: 10,),
   //                               Row(
   //                                 children: [
-  //                                     _dataform.cpfCnpj != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+  //                                     _data.cpfCnpj != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
   //                                     Text('CPF Cliente' , style: textSize,)
   //                               ]),
   //                               SizedBox(height: 10,),
   //                               Row(
   //                                 children: [
-  //                                     _dataform.assinatura != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+  //                                     _data.assinatura != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
   //                                     Text('Assinatura Cliente' , style: textSize,)
   //                               ]),
   //                               SizedBox(height: 10,),
   //                               Row(
   //                                 children: [
-  //                                     _dataform.imagems != null  ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
-  //                                     Text('${_dataform.imagems?.length} Fotos dos produtos Entregues.' , style: textSize,)
+  //                                     _data.imagems != null  ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+  //                                     Text('${_data.imagems?.length} Fotos dos produtos Entregues.' , style: textSize,)
   //                               ]),
 
   //                               SizedBox(height: 10),
@@ -373,8 +584,8 @@ class _StepperEntregasState extends State<StepperEntrega> {
   //                                TextFormField(
   //                                 key: ValueKey('OBS:'),
   //                                 maxLines: 4,
-  //                                 initialValue: _dataform.observacao,
-  //                                 onChanged: (obs) => _dataform.observacao = obs,
+  //                                 initialValue: _data.observacao,
+  //                                 onChanged: (obs) => _data.observacao = obs,
   //                                 validator: (_obs) {
   //                                   final obs = _obs ?? '';
   //                                   if (obs.trim() != ''){
