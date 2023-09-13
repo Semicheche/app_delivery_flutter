@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your apprlication.
   @override
   Widget build(BuildContext context) {
+    final fontSize = MediaQuery.of(context).size.width*0.05;
     return MaterialApp(
       title: 'Delivery APP',
       theme: ThemeData( 
@@ -26,10 +27,11 @@ class MyApp extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               side: BorderSide(color: Colors.blue.shade800)
             ),
-            fixedSize: Size.fromWidth(350),
 
-            textStyle: const TextStyle(
-              fontSize: 20,
+            fixedSize: Size.fromWidth(MediaQuery.of(context).size.width*0.9),
+
+            textStyle: TextStyle(
+              fontSize: fontSize,
             ),
             backgroundColor: Color.fromARGB(211, 252, 252, 252),
             

@@ -1,6 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delivery_app/screens/loading_page.dart';
+import 'package:delivery_app/screens/saving_page.dart';
+import 'package:delivery_app/widgets/messages.dart';
 import 'package:intl/intl.dart';
 
 import 'package:delivery_app/models/data_entrega.dart';
@@ -8,18 +9,12 @@ import 'package:delivery_app/screens/entregas/description_entrega.dart';
 import 'package:delivery_app/screens/entregas/firabase_service_entrega.dart';
 import 'package:delivery_app/screens/entregas/picture_entrega.dart';
 import 'package:delivery_app/screens/entregas/signature_entrega.dart';
-import 'package:delivery_app/screens/laoding_page.dart';
-import 'package:delivery_app/screens/loading_position_page.dart';
-import 'package:delivery_app/screens/loading_save_page.dart';
-import 'package:delivery_app/screens/menu_page.dart';
 import 'package:delivery_app/services/firebase_storage/add_storage_file.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-
-/// Flutter code sample for [Stepper].
 
 class StepperEntrega extends StatefulWidget {
   var item;
@@ -28,7 +23,7 @@ class StepperEntrega extends StatefulWidget {
   StepperEntrega({
     Key? key, 
     required this.item,
-    this.entrega
+    required this.entrega
     }) : super(key: key);
 
   @override
@@ -40,13 +35,11 @@ class StepperEntrega extends StatefulWidget {
 class _StepperEntregasState extends State<StepperEntrega> {
   int _index = 0;
   bool isChecked = false;
-
-
   
   var _data;
   var data;
   LocationData? _locationData = null;
-  double _padding = 190;
+  double _padding = 0;
 
   Future<void> _getCurrentLocation() async {
     
@@ -75,62 +68,110 @@ class _StepperEntregasState extends State<StepperEntrega> {
 
   void _onSubmitEntrega() async {
     _data = widget.entrega;
+    if (!isChecked && !_data.isValid()){
+      var msg = ' ${ _data.name == null ? ", Nome" : ""} ${_data.cpfCnpj == null ? ", CPF" : ""} ${_data.assinatura == null ? ", Assinatura" : ""} ${_data.imagens.length <= 0 ? ", Fotos" : ""} ';
+
+      SnackMsg().error(context, "Complete as Informações: $msg");
+      return;
+    }
+
     if (isChecked && _data.observacao == ''){
-      showTopSnackBar(
-        Overlay.of(context), 
-        CustomSnackBar.error(message: 'insira uma observação!'),
-      );
+      SnackMsg().error(context, 'insira uma observação!');
       return;
     }
     if (!isChecked){
       Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const LoadingPositionPage()),
+        MaterialPageRoute(builder: (context) => SavingPage(msg: 'Salvando', img: _data.imagens.length > 0, done: _data.assinatura != null,)),
+      );
+
+    }else{
+      Navigator.push(context,
+        MaterialPageRoute(builder: (context) => SavingPage(msg: 'Salvando', img: _data.imagens.length > 0, done: _data.assinatura != null,)),
       );
     }
-    await _getCurrentLocation();
-    final LocationEntrega localizacao = getLocation();
-
-    _data.location = localizacao;
-    _data.criadoEm = _data.criadoEm ?? DateTime.now();
-    _data.alteradoEm = DateTime.now();
-
-    
-    if (_data != null) {
+    if (_data.id != '') {
+      
       List listUrls = [];
       var assinaturaUrl;
       var folder = 'entregas_concluidas/${_data?.idEntrega}';
       
-      Navigator.push(context,
-        MaterialPageRoute(builder: (context) => LoadingSavePage()),
-      );
+      
+      await _getCurrentLocation();
+      final LocationEntrega localizacao = getLocation();
 
+      _data.location = localizacao;
+      _data.alteradoEm = DateTime.now();
+
+     
+        
       if (_data.assinatura != null){
         assinaturaUrl = await StorageFile().uploadImageMemoryToStorage('$folder/assinatura', _data.assinatura as Uint8List);
+         _data.assinaturaUrl = assinaturaUrl;
       }
 
       if (_data.imagens != null){
         listUrls = await StorageFile().uploadImageFileToStorage(folder, _data.imagens);
+         _data.imagens = listUrls;
       }
-
-      _data.assinaturaUrl = assinaturaUrl;
-      _data.imagens = listUrls;
       
-      FirebaseServiceEntrega().saveEntrega(_data);
-      if (_data.imagens != null) {
-        Navigator.pop(context);
-      }
+      var res = await FirebaseServiceEntrega().updateEntrega(_data);
       Navigator.pop(context);
       Navigator.pop(context);
 
-      showTopSnackBar(
-        Overlay.of(context), 
-        CustomSnackBar.success(message: 'Entrega Efetuada com Sucesso!'),
-      );
+      if (res.contains('Error')){
+         SnackMsg().error(context, res);
+      }else{
+        SnackMsg().success(context, res);
+      }
+    
+    }else {
+     
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => SavingPage(msg: 'Salvando', img: (_data.imagens != null), done: true,)),
+        );
+      await _getCurrentLocation();
+      final LocationEntrega localizacao = getLocation();
+
+      _data.location = localizacao;
+      _data.criadoEm = _data.criadoEm ?? DateTime.now();
+      _data.alteradoEm = DateTime.now();
+
+      
+      if (_data != null) {
+        List listUrls = [];
+        var assinaturaUrl;
+        var folder = 'entregas_concluidas/${_data?.idEntrega}';
+        
+        
+
+        if (_data.assinatura != null){
+          assinaturaUrl = await StorageFile().uploadImageMemoryToStorage('$folder/assinatura', _data.assinatura as Uint8List);
+        }
+
+        if (_data.imagens != null){
+          listUrls = await StorageFile().uploadImageFileToStorage(folder, _data.imagens);
+        }
+
+        _data.assinaturaUrl = assinaturaUrl;
+        _data.imagens = listUrls;
+        
+        FirebaseServiceEntrega().saveEntrega(_data);
+        if (_data.imagens != null) {
+          Navigator.pop(context);
+        }
+        Navigator.pop(context);
+        Navigator.pop(context);
+
+        var message = (_data.observacao != '' || _data.observacao != null) ?  'Salva tentativa de Entrega!' : 'Entrega Efetuada com Sucesso!';
+
+        SnackMsg().success(context, message);
+      }
     }
 
   }
 
-  List<Widget> listObservations(){
+  List<Widget> listObservations( BuildContext context){
+    var fontSize = MediaQuery.of(context).size.width*0.045;
     List<Widget> list = [];
     widget.entrega.observations.forEach((obs){
         list.add( Container(
@@ -140,16 +181,20 @@ class _StepperEntregasState extends State<StepperEntrega> {
                   color: Colors.black45,
                   width: 0.8)
               ),
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.only(top: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
+                  if(MediaQuery.of(context).size.width >= 350) Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   children: [ Text('Observação', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    Text('${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(obs["criadoEm"]))}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    children: [ 
+                    Text('Observação', style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold)),
+                    Text('${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(obs["criadoEm"]))}', style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold)),
                    ]),
-                  Text('${obs["observacao"]}', style: TextStyle(fontSize: 17)),
+                  if(MediaQuery.of(context).size.width <= 350) Text('Observação', style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold)),
+                  if(MediaQuery.of(context).size.width <= 350) Text('${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(obs["criadoEm"]))}', style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold)),
+                  Text('${obs["observacao"]}', style: TextStyle(fontSize: fontSize)),
                   
                 ],
               ),
@@ -163,7 +208,8 @@ class _StepperEntregasState extends State<StepperEntrega> {
 
   @override
   Widget build(BuildContext context) {
-     var textSize =  TextStyle(fontSize: 17);
+     var textSize =  TextStyle(fontSize: MediaQuery.of(context).size.width*0.042);
+     var fontSize = (MediaQuery.of(context).size.width*0.055);
      var _item = widget.item;
      var entrega = widget.entrega;
         
@@ -175,7 +221,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
             children: [
               Expanded(
                 child: Stepper(
-            type: StepperType.horizontal,
+            type:  MediaQuery.of(context).size.width < 350 ? StepperType.vertical : StepperType.horizontal,
             currentStep: _index,
             onStepCancel: () {
               if (_index > 0) {
@@ -231,9 +277,9 @@ class _StepperEntregasState extends State<StepperEntrega> {
                 title: const Text('Detalhes'),
                 content: Column(
                   children: [
-                          const Text('INFORMAÇÕES DO CLIENTE', 
+                          Text('INFORMAÇÕES DO CLIENTE', 
                           style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize:  fontSize,
                                   fontWeight: FontWeight.bold,
                                   ),
                           ),
@@ -248,6 +294,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
                                   setState(() {
                                     isChecked = value!;
                                     _index = 3;
+                                    _data.observacao = '';
                                   });
                                 }),
                             ]
@@ -292,32 +339,56 @@ class _StepperEntregasState extends State<StepperEntrega> {
                               child: Column(
                                 children: [
                                 Text('CHECKLIST FINAL', style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                         ),),
                                 Row(
                                   children: [
-                                      _data?.name != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+                                      _data?.name != null 
+                                      ? IconButton( icon: Icon(Icons.check_box, color: Colors.green), onPressed: () {})
+                                      : IconButton( icon: Icon(Icons.check_box_outline_blank, color: Colors.red), onPressed: () {
+                                           setState(() {
+                                             _index = 0;
+                                           });
+                                      },),
                                       Text('Nome Cliente' , style: textSize,) 
                                   ]
                                 ),
                                 SizedBox(height: 10,),
                                 Row(
                                   children: [
-                                      _data.cpfCnpj != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+                                      _data.cpfCnpj != null 
+                                      ? IconButton( icon: Icon(Icons.check_box, color: Colors.green), onPressed: () {})
+                                      : IconButton( icon: Icon(Icons.check_box_outline_blank, color: Colors.red), onPressed: () {
+                                           setState(() {
+                                             _index = 0;
+                                           });
+                                      },),
                                       Text('CPF Cliente' , style: textSize,)
                                 ]),
                                 SizedBox(height: 10,),
                                 Row(
                                   children: [
-                                      _data.assinaturaUrl != null ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
+                                      _data.assinaturaUrl != null || _data.assinatura != null 
+                                      ? IconButton( icon: Icon(Icons.check_box, color: Colors.green), onPressed: () {}) 
+                                      : IconButton( icon: Icon(Icons.check_box_outline_blank, color: Colors.red), onPressed: () {
+                                           setState(() {
+                                             _index = 1;
+                                           });
+                                      },),
                                       Text('Assinatura Cliente' , style: textSize,)
                                 ]),
                                 SizedBox(height: 10,),
                                 Row(
                                   children: [
-                                      _data.imagens != null  ? Icon(Icons.check_box, color: Colors.green,) : Icon(Icons.check_box_outline_blank, color: Colors.red,),
-                                      Text('${_data.imagens != null ? 0 : _data.imagens} Fotos dos produtos Entregues.' , style: textSize,)
+                                      (_data.imagens != null && _data.imagens.length > 0) 
+                                      ? IconButton( icon: Icon(Icons.check_box, color: Colors.green), onPressed: () {})
+                                      : IconButton( icon: Icon(Icons.check_box_outline_blank, color: Colors.red), onPressed: () {
+                                           setState(() {
+                                             _index = 2;
+                                           });
+                                      },),
+                                      Text('${_data.imagens == null ? 0 : _data.imagens.length} Fotos dos produtos' , style: textSize,)
                                 ]),
 
                                 SizedBox(height: 10),
@@ -328,9 +399,9 @@ class _StepperEntregasState extends State<StepperEntrega> {
                             
                             if (isChecked) Container(
                               child: Column(children: [
-                                 const Text('INSIRA UMA OBSERVAÇÃO',
+                                  Text('INSIRA UMA OBSERVAÇÃO',
                                   style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                         ), ),
                                 SizedBox(height: 20,),
@@ -355,18 +426,18 @@ class _StepperEntregasState extends State<StepperEntrega> {
                       
                             ),
                             if (_data?.observations.length > 0) Column(
-                               children: listObservations().toList()
+                               children: listObservations(context).toList()
                              ),
                             
                             ]
                         )
                       ),
-                      if (isChecked || (_data.name != null && _data.cpfCnpj != null && _data.assinatura != null)) Padding(
+                      if (isChecked || _data != null) Padding(
                             padding: EdgeInsets.all(5),
                             child: Container( 
                               child : ElevatedButton.icon(
                                   onPressed: _onSubmitEntrega,
-                                  icon: Icon(Icons.check), 
+                                  icon: Icon(Icons.check),
                                   label: Text('Conlcuir Entrega')
                                 ),
                               )
@@ -390,6 +461,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
           title: Text(" Entrega Nº ${_item['nrEntrega']}", style: TextStyle(color: Colors.white),),
           centerTitle: true,
           elevation: 3,
+          leading: BackButton(color: Colors.white),
         ), body: Center(
                   child: display(entrega),
                     )

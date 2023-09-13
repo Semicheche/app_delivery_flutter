@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:delivery_app/models/auth_form_data.dart';
-import 'package:delivery_app/services/biometry/biometry.dart';
 import 'package:flutter/material.dart';
-
-import '../services/auth/atuh_save_credential.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(AuthFormData) onSubmit;
@@ -22,6 +20,7 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   final _authData = AuthFormData();
   bool _passwordVisible = true;   
+  
 
   void _submit() {
     final isValid = _formKey.currentState?.validate() ?? false;
@@ -33,6 +32,7 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
+    print('AQUI');
     return Card(
       color: Color.fromRGBO(255, 255, 255, 1),
       margin: const EdgeInsets.all(20),
@@ -46,6 +46,12 @@ class _AuthFormState extends State<AuthForm> {
               const CircleAvatar(
                 radius: 60,
                 backgroundImage: AssetImage("assets/images/delivery-man1.png")
+              ),
+              TextFormField(
+                key: ValueKey('nome'),
+                onChanged: (value) {
+                  print(value);
+                },
               ),
               SizedBox(height: 20),
               TextFormField(
@@ -76,9 +82,9 @@ class _AuthFormState extends State<AuthForm> {
                       color: Colors.grey,
                       ),
                     onPressed: () {
-                      setState(() {
-                          _passwordVisible = !_passwordVisible;
-                      });
+                      // setState(() {
+                      //     _passwordVisible = !_passwordVisible;
+                      // });
              },
             ),
           

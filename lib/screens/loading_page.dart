@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LoadingSavePage extends StatelessWidget {
-  const LoadingSavePage({Key? key}) : super(key : key);
+class LoadingPage extends StatelessWidget {
+  const LoadingPage({Key? key}) : super(key : key);
+  
 
   @override
   Widget build(BuildContext context) {
+    final fontSize = MediaQuery.of(context).size.width*0.05;
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -15,10 +17,10 @@ class LoadingSavePage extends StatelessWidget {
                 backgroundColor: Colors.white,
               ),
               SizedBox(height: 10),
-              Text("Salvando Entrega...", 
+              Text("Carregando...", 
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 20
+                fontSize: fontSize,
+                color: Colors.white
               )),
             ],
           ),

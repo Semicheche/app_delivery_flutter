@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:delivery_app/screens/laoding_page.dart';
+import 'package:delivery_app/screens/loading_page.dart';
 
 import 'package:flutter/material.dart';
 

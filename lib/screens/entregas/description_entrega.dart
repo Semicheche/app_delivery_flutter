@@ -2,6 +2,7 @@ import 'package:delivery_app/models/data_entrega.dart';
 import 'package:delivery_app/screens/entregas/stepper_entrega.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class descriptionEntrega extends StatefulWidget {
   final data;
@@ -16,20 +17,46 @@ class descriptionEntrega extends StatefulWidget {
   State<descriptionEntrega> createState() => _descriptionEntregaState();
 }
 
+class ExampleMask {
+
+  final TextEditingController textController = TextEditingController();
+  final MaskTextInputFormatter formatter;
+  final FormFieldValidator<String>? validator;
+  final String hint;
+  final TextInputType textInputType;
+
+  ExampleMask({
+    required this.formatter,
+    this.validator,
+    required this.hint,
+    required this.textInputType
+  });
+
+}
+
+
 class _descriptionEntregaState extends State<descriptionEntrega> {
-  var textSize =  TextStyle(fontSize: 17);
-  var textSizeProduct =  TextStyle(fontSize: 15);
   bool isChecked = false;
 
   
 
   @override
   Widget build(BuildContext context) {
+    var textSize =  TextStyle(fontSize: MediaQuery.of(context).size.width*0.040);
+    var textSizeProduct =  TextStyle(fontSize: MediaQuery.of(context).size.width*0.040);
     var _data = widget.data;
     var _item = widget.item;
+    var fontSize = MediaQuery.of(context).size.width*0.042;
+    var width = MediaQuery.of(context).size.width*0.02;
 
     List _produtos = _item["doctos"][0]["produtos"];
-  print('is valid ${_data.isValid()}');
+
+    var maskFormatter = MaskTextInputFormatter(
+      mask: '###.###.###-##', 
+      filter: { "#": RegExp(r'[0-9]') },
+      type: MaskAutoCompletionType.lazy
+    );
+
     return Column(
                   children: [
                     Container(
@@ -45,6 +72,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                   onChanged: (name) => setState(() {
                                     _data?.name = name;
                                   }),
+                                  autofocus: true,
                                   enabled: !_data.isValid(),
                                   validator: (_name) {
                                     final nome = _name ?? '';
@@ -59,22 +87,25 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                 ),
                                 SizedBox(height: 10,),
                                 if (!isChecked) TextFormField(
-                                  key: ValueKey('cpfCnpj'),
-                                  initialValue: _data?.cpfCnpj != null ? _data?.cpfCnpj : '',
-                                  onChanged: (cpfCnpj) => _data.cpfCnpj = cpfCnpj,
-                                  keyboardType: TextInputType.number,
-                                  enabled: !_data.isValid(),
-                                  validator: (_cpfCnpj) {
-                                    final cpfCnpj = _cpfCnpj ?? '';
-                                    if (cpfCnpj.length < 11){
-                                      return 'Insira um CPF Valido';
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'CPF:'
-                                  ),
-                                ),
+                                                key: ValueKey('cpfCnpj'),
+                                                initialValue: _data?.cpfCnpj != null ? _data?.cpfCnpj : '',
+                                                inputFormatters: [ maskFormatter ],
+                                                autocorrect: false,
+                                                keyboardType: TextInputType.number,
+                                                onChanged: (cpfCnpj) => _data.cpfCnpj = cpfCnpj,
+                                                enabled: !_data.isValid(),
+                                                autofocus: true,
+                                                decoration: const InputDecoration(
+                                                  hintText: '000.000.000-00',
+                                                  fillColor: Colors.white,
+                                                  border: OutlineInputBorder(),
+                                                  labelText: 'CPF:'
+                                                  
+                                                ),
+                                                
+                                              ),
+                                // if (!isChecked) buildTextField(cpfMask())
+                                
                               ]),
                               ),
                                 
@@ -92,21 +123,22 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                     children: [
                                       if (_data?.name == null) const SizedBox(height:20),
                                       Text('DETALHES DA ENTREGA', style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: fontSize,
                                         fontWeight: FontWeight.bold,
                                     ),
                                     ),
                                     if (_data.isValid()) Image.asset('assets/images/pngwing.com.png', width: 200, height: 100, fit: BoxFit.fitWidth,), 
-                                    if (_data.isValid()) Text('ENTREGA EFEUTADA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(_data?.criadoEm != null ? _data?.criadoEm : DateTime.now())}', style: TextStyle(color: Colors.red.shade800 , fontSize: 17), ),
-                                    if (_data.observations.length > 0) Text('TENTATIVA DE ENTREGA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(_data?.criadoEm)}', style: TextStyle(color: Colors.red.shade800 , fontSize: 15), ),
-                                    if (_data?.name != null)const SizedBox(height:20),
+                                    if (_data.isValid()) Text('ENTREGA EFEUTADA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(_data?.alteradoEm)}', style: TextStyle(color: Colors.red.shade800 , fontSize: fontSize, fontWeight: FontWeight.bold)),
+                                    if (_data.observations != null && _data.observations.length > 0 || _data.isValid()) const SizedBox(height:10),
+                                    if (_data.observations != null && _data.observations.length > 0 && !_data.isValid()) Text('TENTATIVA DE ENTREGA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(_data.observations.last['criadoEm']))}', style: TextStyle(color: Colors.red.shade800 , fontSize: fontSize, fontWeight: FontWeight.bold), ),
+                                    if (_data.observations != null && _data.observations.length > 0) const SizedBox(height:10),
 
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: width),
                                     Text('FILIAL: ${_item["doctos"][0]["codFilial"]}', style: textSize),
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: width),
                                     Text('Nº DOCUMENTO: ${_item["doctos"][0]["nrDocto"]}', style: textSize,),         
                                 ]),
                                 
@@ -114,7 +146,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: width),
                                     Text('ENDEREÇO:', style: textSize)
                                   ],
                                 ),
@@ -123,7 +155,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: width),
                                     Expanded(
                                       child: Text(
                                           '''${_item["doctos"][0]["parceiro"]["endereco"]}, 
@@ -131,7 +163,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                           style: textSize,
                                           softWrap: false,
                                           overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
+                                          maxLines: 8,
                                         ),
                                       ),
                                     
@@ -139,37 +171,43 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: width),
                                     Text('COMPLELEMNTO', style: textSize)
                                   ]
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: width),
                                     Expanded(
                                     child: Text('${_item["doctos"][0]["parceiro"]["complemento"]}', 
                                         style: textSize,
                                         softWrap: false,
                                         overflow: TextOverflow.ellipsis,
-                                        maxLines: 4),
+                                        maxLines: 6),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const SizedBox(width: 10),
-                                    Text('CEP: ${_item["doctos"][0]["parceiro"]["cep"]} ${_item["doctos"][0]["parceiro"]["municipio"]}, ${_item["doctos"][0]["parceiro"]["uf"]}', style: textSize),
+                                    SizedBox(width: width),
+                                    Expanded(
+                                    child: Text('CEP: ${_item["doctos"][0]["parceiro"]["cep"]} ${_item["doctos"][0]["parceiro"]["municipio"]}, ${_item["doctos"][0]["parceiro"]["uf"]}',
+                                        style: textSize,
+                                        softWrap: false,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 6),
+                                    ),
                                     
                                   ],
                                 ),
                                               Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const SizedBox(width: 10),
+                                    SizedBox(width: width),
                                     Text('PRODUTOS', style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: fontSize,
                                         fontWeight: FontWeight.bold,
                                         backgroundColor: Colors.amber.shade50,
                                     ),),
@@ -186,7 +224,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                      Column(
                         children: _produtos.map((e) {
                           return Container(
-                                padding: const EdgeInsets.all(16),
+                                padding: const EdgeInsets.all(10),
                                 decoration:  BoxDecoration(
                                 color: Colors.amber.shade50,
                                 border: Border.all(
@@ -208,7 +246,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                               style: textSizeProduct,
                                               softWrap: false,
                                               overflow: TextOverflow.ellipsis,
-                                              maxLines: 2)
+                                              maxLines: 3)
                                     ),
                                   ]
                                 ),

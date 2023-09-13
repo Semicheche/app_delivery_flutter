@@ -64,8 +64,6 @@ class Entrega {
     SnapshotOptions? options
   ) {
     final data = snapshot.data();
-    print('DATA FROM FIREBASE');
-    print(data?.keys);
 
     return Entrega(
       '', 

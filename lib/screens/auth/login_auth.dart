@@ -23,34 +23,35 @@ class _LoginAuthState extends State<LoginAuth> {
   AuthSaveCredentials _credentials = AuthSaveCredentials();
   final LocalAuthentication localAuth = LocalAuthentication();
 
-  @override
-  void initState(){
-   checkBiometry();
-  }
+  // @override
+  // void initState(){
+  //   // super.initState();
+  //   // checkBiometry();
+  // }
 
   Future<void> checkBiometry() async{
-
+     print('AQUI');
      Biometry bio = Biometry();
      AuthSaveCredentials _credentials = AuthSaveCredentials();
 
     if (await bio.activeBiometry()){
-
+      print('tem biometria');
       bool authLocal =  await bio.authenticate();
       if (authLocal){
         var email = await _credentials.getByKey('email');
         var password = await _credentials.getByKey('password');
+
         setState(() => _isLoading = !_isLoading);
         
         
         AuthService().login(email!, password!);
-        
-      }else {
-        return;
+      
       }
     }    
   }
 
   Future<void> _handleSubmit(AuthFormData authData) async {
+
     final biometry = Biometry();
     
     try {
@@ -119,13 +120,14 @@ class _LoginAuthState extends State<LoginAuth> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: 
-      Focus(
-        onFocusChange: (hasFocus) {
-          if (hasFocus){
-            checkBiometry();
-          }
-        },
-        child: Stack(
+      // Focus(
+        // onFocusChange: (hasFocus) {
+        //   if (hasFocus){
+        //     checkBiometry();
+        //   }
+        // },
+        // child:
+         Stack(
         children: [
           Center(
             child: SingleChildScrollView(
@@ -143,7 +145,7 @@ class _LoginAuthState extends State<LoginAuth> {
           ),
         ],
       )
-      ),
+      // ),
     );
   }
 }

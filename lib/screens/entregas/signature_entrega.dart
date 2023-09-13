@@ -38,10 +38,7 @@ class _SignatureEntregaState extends State<SignatureEntrega> {
       img = Uint8List.view(byteData!.buffer);
       setState(() {
         widget.data.assinatura = img!;
-      });
-      
-    
-
+      });      
   }
 
   @override

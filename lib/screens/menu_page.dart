@@ -42,7 +42,7 @@ class _MenuPageState extends State<MenuPage> {
                   icon: Icon(Icons.local_shipping_rounded,size: 100.0),
                   style: ElevatedButton.styleFrom(
                           // backgroundColor: Colors.grey.shade100,
-                          minimumSize: Size(150, 150)
+                          minimumSize: Size(150, 140)
                         ),
                 ),
               ),
@@ -58,7 +58,7 @@ class _MenuPageState extends State<MenuPage> {
                   icon: Icon(Icons.weekend_rounded, size: 100.0),
                   style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white70, //elevated btton background color
-                          minimumSize: Size(150, 150)
+                          minimumSize: Size(150, 140)
                         ),
               ),
               ),

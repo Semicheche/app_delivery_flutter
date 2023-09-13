@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/models/data_entrega.dart';
 import 'package:delivery_app/screens/entregas/firabase_service_entrega.dart';
 import 'package:delivery_app/screens/entregas/stepper_entrega.dart';
-import 'package:delivery_app/screens/laoding_page.dart';
+import 'package:delivery_app/screens/loading_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -31,15 +31,6 @@ class _ListEntregaState extends State<ListEntrega> {
     final entregas = {};
     var entregador;
     User? currentUser = FirebaseAuth.instance.currentUser;
-  
-    await FirebaseFirestore.instance.collection("entregas").orderBy("criadoEm").get().then((value){
-      value.docs.forEach((element) {
-        var _entregasFeitas = element.data();
-        
-        print(_entregasFeitas);
-        
-      }); 
-    });
 
 
     await FirebaseFirestore.instance.collection("entregadores")
@@ -68,11 +59,10 @@ class _ListEntregaState extends State<ListEntrega> {
     }
   }
 
-  Widget getIconListStatus(entrega) {
-    print(entrega);
-    var concluido = entrega != null ? entrega.isValid() : false;
+  Widget getIconListStatus(_entregue) {
+
     return IconButton(
-      icon: concluido
+      icon: _entregue
       ? Icon(Icons.checklist_rtl, color: Colors.green.shade500) 
       : Icon(Icons.pending_actions_sharp),
       onPressed: () {},
@@ -93,6 +83,7 @@ class _ListEntregaState extends State<ListEntrega> {
  
   @override
   Widget build(BuildContext context) {
+    var _entregue = false;
     CollectionReference teste = FirebaseFirestore.instance.collection("teste_firestore");
 
     if (_entregas.isEmpty){
@@ -137,7 +128,7 @@ class _ListEntregaState extends State<ListEntrega> {
                     ));
                   },
                   //leading: //getIconListStatus(value['nrEntrega']) ///getIconList(value['nrEntrega']),
-                  trailing: getIconListStatus(entrega)
+                  trailing: getIconListStatus(_entregue)
                   // const Icon(Icons.pending_actions_sharp),
                   ),
                 ),
@@ -150,9 +141,10 @@ class _ListEntregaState extends State<ListEntrega> {
           backgroundColor: Theme.of(context).primaryColor,
           automaticallyImplyLeading: true,
           actions: [],
-          title: Text("ENTREGAS", style: TextStyle(color: Colors.white),),
+          title: Text("Entregas", style: TextStyle(color: Colors.white),),
           centerTitle: true,
           elevation: 3,
+          leading: BackButton(color: Colors.white),
         ),
       body: StreamBuilder<QuerySnapshot>(
         stream: teste.snapshots().map((event) => event),

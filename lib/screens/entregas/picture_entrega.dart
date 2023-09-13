@@ -31,7 +31,6 @@ class _PictureEntregaState extends State<PictureEntrega> {
     
     setState(() {
       imagens.add(File(imageFile.path));
-      print(imagens);
       widget.data.imagens = imagens;
     });
   }
@@ -39,7 +38,6 @@ class _PictureEntregaState extends State<PictureEntrega> {
   @override
   Widget build(BuildContext context) {
     var imagens= widget.data.imagens ?? [];
-    print(imagens);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,8 +52,6 @@ class _PictureEntregaState extends State<PictureEntrega> {
             // viewportFraction: 1,
           ),
           itemBuilder: (context, index, realIdx) {
-            print('AQUI');
-            print(imagens);
             return Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
               child: Center(
@@ -96,36 +92,4 @@ class _PictureEntregaState extends State<PictureEntrega> {
       ],
     );
   }
-    
-    // print(imagens);
-    // if (imagens.isNotEmpty){
-    //   print('AQUI tem IMAGEM');
-    //   return Column(
-    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //     crossAxisAlignment: CrossAxisAlignment.stretch,
-    //     children: [
-    //       if (imagens.isNotEmpty) Container(
-    //           height: 460,
-    //           child: CarouselSlider.builder(
-    //         itemCount: imagens.length,
-    //         options: CarouselOptions(
-    //           autoPlay: false,
-    //           aspectRatio: 2.0,
-    //           // viewportFraction: 1,
-    //         ),
-    //         itemBuilder: (context, index, realIdx) {
-    //           return Container(
-    //             margin: EdgeInsets.symmetric(horizontal: 5),
-    //             child: Center(
-    //                 child: Image.network(imagens[index],
-    //                     fit: BoxFit.cover, width: 1000)),
-    //           );
-    //         },
-    //         ),
-    //       )
-    //     ]
-    //   );
-    // }else{
-    //   
-  // }
 }

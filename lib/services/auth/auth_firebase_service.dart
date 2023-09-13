@@ -13,6 +13,8 @@ class AuthFirebaseService implements AuthService {
   static final _userStream = Stream<AuthUser?>.multi((controller) async { 
     final authChanges = FirebaseAuth.instance.authStateChanges();
     await for(final user in authChanges) {
+      print("---USER");
+      print(user);
       _currentUser = user == null ? null : _toAuthUser(user);
       controller.add(_currentUser);
     }
