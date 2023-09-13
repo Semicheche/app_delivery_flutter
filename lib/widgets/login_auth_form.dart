@@ -47,12 +47,6 @@ class _AuthFormState extends State<AuthForm> {
                 radius: 60,
                 backgroundImage: AssetImage("assets/images/delivery-man1.png")
               ),
-              TextFormField(
-                key: ValueKey('nome'),
-                onChanged: (value) {
-                  print(value);
-                },
-              ),
               SizedBox(height: 20),
               TextFormField(
                 key: ValueKey('email'),
@@ -82,9 +76,9 @@ class _AuthFormState extends State<AuthForm> {
                       color: Colors.grey,
                       ),
                     onPressed: () {
-                      // setState(() {
-                      //     _passwordVisible = !_passwordVisible;
-                      // });
+                      setState(() {
+                          _passwordVisible = !_passwordVisible;
+                      });
              },
             ),
           

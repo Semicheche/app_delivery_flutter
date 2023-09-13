@@ -6,7 +6,6 @@ import 'package:delivery_app/screens/loading_page.dart';
 import 'package:delivery_app/screens/menu_page.dart';
 import 'package:delivery_app/services/auth/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class ObserverLogin extends StatelessWidget {
@@ -22,19 +21,20 @@ class ObserverLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: init(context),
+        future: this.init(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting){
             return LoadingPage();
           } else {
             return  StreamBuilder<AuthUser?>(
               stream: AuthService().userChanges,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting){
-                  return LoadingPage();
-                } else {
-                  return snapshot.hasData ? MenuPage() : LoginAuth();
+                builder: (context, snapshot) {
+                 if (snapshot.connectionState == ConnectionState.waiting){
+                    return LoadingPage();
+                 } else {
+                  return snapshot.hasData ? MenuPage() : LoginAuth();                  
                 }
+
             });
           }
         },

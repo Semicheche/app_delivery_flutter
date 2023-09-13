@@ -8,17 +8,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:local_auth/local_auth.dart';
 
 class AuthFirebaseService implements AuthService {
+  AuthSaveCredentials _storage = AuthSaveCredentials();
   static AuthUser? _currentUser;
+  static AuthUser? _user;
+  
 
   static final _userStream = Stream<AuthUser?>.multi((controller) async { 
     final authChanges = FirebaseAuth.instance.authStateChanges();
     await for(final user in authChanges) {
-      print("---USER");
-      print(user);
       _currentUser = user == null ? null : _toAuthUser(user);
       controller.add(_currentUser);
     }
   });
+
+  Future<void> getUserLocal() async {
+    _user = await AuthUser(
+            id: '', 
+            name: (await _storage.getByKey('name')) as String, 
+            password: (await _storage.getByKey('password')) as String, 
+            email: (await _storage.getByKey('email')) as String);
+  }
 
   AuthUser? get currentUser {
     return _currentUser;

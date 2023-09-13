@@ -23,14 +23,14 @@ class _LoginAuthState extends State<LoginAuth> {
   AuthSaveCredentials _credentials = AuthSaveCredentials();
   final LocalAuthentication localAuth = LocalAuthentication();
 
-  // @override
-  // void initState(){
-  //   // super.initState();
-  //   // checkBiometry();
-  // }
+  @override
+  void initState(){
+    super.initState();
+    checkBiometry();
+  }
+
 
   Future<void> checkBiometry() async{
-     print('AQUI');
      Biometry bio = Biometry();
      AuthSaveCredentials _credentials = AuthSaveCredentials();
 
@@ -120,13 +120,13 @@ class _LoginAuthState extends State<LoginAuth> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: 
-      // Focus(
-        // onFocusChange: (hasFocus) {
-        //   if (hasFocus){
-        //     checkBiometry();
-        //   }
-        // },
-        // child:
+      Focus(
+        onFocusChange: (hasFocus) {
+          if (hasFocus){
+            checkBiometry();
+          }
+        },
+        child:
          Stack(
         children: [
           Center(
@@ -145,7 +145,7 @@ class _LoginAuthState extends State<LoginAuth> {
           ),
         ],
       )
-      // ),
+      ),
     );
   }
 }
