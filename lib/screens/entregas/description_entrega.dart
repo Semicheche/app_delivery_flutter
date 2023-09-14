@@ -72,7 +72,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                   onChanged: (name) => setState(() {
                                     _data?.name = name;
                                   }),
-                                  autofocus: true,
+                                  autofocus: _data?.name != null ? false : true,
                                   enabled: !_data.isValid(),
                                   validator: (_name) {
                                     final nome = _name ?? '';
@@ -94,7 +94,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                                 keyboardType: TextInputType.number,
                                                 onChanged: (cpfCnpj) => _data.cpfCnpj = cpfCnpj,
                                                 enabled: !_data.isValid(),
-                                                autofocus: true,
+                                                autofocus:  _data?.cpfCnpj != null ? false : true,
                                                 decoration: const InputDecoration(
                                                   hintText: '000.000.000-00',
                                                   fillColor: Colors.white,

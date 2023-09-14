@@ -437,7 +437,7 @@ class _StepperEntregasState extends State<StepperEntrega> {
                             ]
                         )
                       ),
-                      if (isChecked || _data != null) Padding(
+                      if (isChecked || _data != null && !(_data.assinaturaUrl != null || _data.imagens.length > 0)) Padding(
                             padding: EdgeInsets.all(5),
                             child: Container( 
                               child : ElevatedButton.icon(
