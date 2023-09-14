@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               side: BorderSide(color: Colors.blue.shade800)
             ),
-            fixedSize: Size.fromWidth(300), // MediaQuery.of(context).size.width*0.9),
+            fixedSize: Size.fromWidth(350), // MediaQuery.of(context).size.width*0.9),
             textStyle: TextStyle(
               fontSize: fontSize,
             ),

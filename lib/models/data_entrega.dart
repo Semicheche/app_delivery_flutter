@@ -97,7 +97,7 @@ class Entrega {
       };
 
   bool isValid(){
-    if( name != null && cpfCnpj != null && assinaturaUrl != null && imagens!.length > 0 ){
+    if( name != null && cpfCnpj != null && assinatura != null && imagens!.length > 0 ){
       return true;
     }else{
       return false;

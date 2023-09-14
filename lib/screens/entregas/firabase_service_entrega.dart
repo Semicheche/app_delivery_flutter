@@ -32,17 +32,19 @@ class FirebaseServiceEntrega {
   }
   Future<String> updateEntrega(Entrega entrega) async {
     var res = (entrega.assinaturaUrl != null && entrega.imagens!.length > 0) ? 'Entrega Realizada com Sucesso': 'Tentativa de Entrega Salva!' ;
-    if (entrega.observacao != null || entrega.observacao != ''){
+    
       try{
-        entrega.observations.add({
-            'idEntregador': entrega.idEntregador.toString(),
-            'criadoEm': entrega.alteradoEm?.toIso8601String(),
-            'observacao': entrega.observacao,
-            'geolocation':  {
-              'latitude': entrega.location!.lat,
-              'longitude': entrega.location!.lon,
-            },
-          });
+        if (entrega.observacao != null ){
+          entrega.observations.add({
+              'idEntregador': entrega.idEntregador.toString(),
+              'criadoEm': entrega.alteradoEm?.toIso8601String(),
+              'observacao': entrega.observacao,
+              'geolocation':  {
+                'latitude': entrega.location!.lat,
+                'longitude': entrega.location!.lon,
+              },
+            });
+        }
         
         await _firestore.collection('entregas_concluidas').doc(entrega.id).withConverter(fromFirestore: Entrega.fromFirestore, toFirestore: (Entrega entrega, _) => entrega.toFirestore()).update(entrega.toFirestore());
         
@@ -50,7 +52,7 @@ class FirebaseServiceEntrega {
       } catch (err){
         res = 'Error ${err}';
       }
-    }
+    
     print('update $res');
     return res;
   }

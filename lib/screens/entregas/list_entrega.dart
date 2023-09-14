@@ -33,7 +33,7 @@ class _ListEntregaState extends State<ListEntrega> {
     User? currentUser = FirebaseAuth.instance.currentUser;
 
 
-    await FirebaseFirestore.instance.collection("entregadores")
+    await FirebaseFirestore.instance.collection("colaboradores")
     .where('userId', isEqualTo: currentUser?.uid)
     .get().then(
       (value) async { 

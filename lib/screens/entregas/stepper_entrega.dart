@@ -69,7 +69,9 @@ class _StepperEntregasState extends State<StepperEntrega> {
   void _onSubmitEntrega() async {
     _data = widget.entrega;
     if (!isChecked && !_data.isValid()){
-      var msg = ' ${ _data.name == null ? ", Nome" : ""} ${_data.cpfCnpj == null ? ", CPF" : ""} ${_data.assinatura == null ? ", Assinatura" : ""} ${_data.imagens.length <= 0 ? ", Fotos" : ""} ';
+      print(!isChecked );
+      print(!_data.isValid());
+      var msg = ' ${ _data.name == null ? " Nome" : ""} ${_data.cpfCnpj == null ? " CPF" : ""} ${_data.assinatura == null ? " Assinatura" : ""} ${_data.imagens.length <= 0 ? ", Fotos" : ""} ';
 
       SnackMsg().error(context, "Complete as Informações: $msg");
       return;
@@ -78,6 +80,9 @@ class _StepperEntregasState extends State<StepperEntrega> {
     if (isChecked && _data.observacao == ''){
       SnackMsg().error(context, 'insira uma observação!');
       return;
+    }
+    if (!isChecked && _data.observacao != ''){
+      _data.observacao = null;
     }
     if (!isChecked){
       Navigator.push(context,

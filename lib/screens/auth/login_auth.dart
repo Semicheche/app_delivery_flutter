@@ -84,7 +84,7 @@ class _LoginAuthState extends State<LoginAuth> {
          
           _credentials.add('email', authData.email);
           _credentials.add('password', authData.password);
-          _credentials.add('check', '1');
+          _credentials.add('remember', '1');
         }
 
       
