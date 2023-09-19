@@ -84,7 +84,7 @@ class _PictureEntregaState extends State<PictureEntrega> {
           ),
         ),   
         SizedBox(height: 20,),
-        if(!widget.data?.isValid()) TextButton.icon(
+        if(imagens.length >= 0) TextButton.icon(
               onPressed: _takePicture, 
               icon: Icon(Icons.camera_alt_rounded), 
               label: Text('Tirar Foto'),

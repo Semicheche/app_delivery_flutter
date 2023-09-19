@@ -128,7 +128,7 @@ class _descriptionEntregaState extends State<descriptionEntrega> {
                                     ),
                                     ),
                                     if (_data.isValid()) Image.asset('assets/images/pngwing.com.png', width: 200, height: 100, fit: BoxFit.fitWidth,), 
-                                    if (_data.isValid()) Text('ENTREGA EFEUTADA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(_data?.alteradoEm)}', style: TextStyle(color: Colors.red.shade800 , fontSize: fontSize, fontWeight: FontWeight.bold)),
+                                    if (_data.isValid() && _data?.alteradoEm != null) Text('ENTREGA EFEUTADA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(_data?.alteradoEm)}', style: TextStyle(color: Colors.red.shade800 , fontSize: fontSize, fontWeight: FontWeight.bold)),
                                     if (_data.observations != null && _data.observations.length > 0 || _data.isValid()) const SizedBox(height:10),
                                     if (_data.observations != null && _data.observations.length > 0 && !_data.isValid()) Text('TENTATIVA DE ENTREGA EM ${DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.parse(_data.observations.last['criadoEm']))}', style: TextStyle(color: Colors.red.shade800 , fontSize: fontSize, fontWeight: FontWeight.bold), ),
                                     if (_data.observations != null && _data.observations.length > 0) const SizedBox(height:10),

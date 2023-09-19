@@ -3,10 +3,8 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/models/data_entrega.dart';
-import 'package:delivery_app/services/firebase_storage/add_storage_file.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:provider/provider.dart';
+
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -52,9 +50,15 @@ class FirebaseServiceEntrega {
       } catch (err){
         res = 'Error ${err}';
       }
-    
-    print('update $res');
+  
     return res;
+  }
+
+  Future<String> setEntregaConcluida(String uidEntrega) async{
+
+    await FirebaseFirestore.instance.collection('entregas').doc(uidEntrega).update({'status': true});
+    
+    return uidEntrega;
   }
 
   Future<String>  saveEntrega(Entrega dataEntrega) async {

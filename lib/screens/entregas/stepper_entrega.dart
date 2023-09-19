@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:delivery_app/screens/loading_page.dart';
 import 'package:delivery_app/screens/saving_page.dart';
 import 'package:delivery_app/widgets/messages.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/intl.dart';
 
 import 'package:delivery_app/models/data_entrega.dart';
@@ -67,10 +68,11 @@ class _StepperEntregasState extends State<StepperEntrega> {
   
 
   void _onSubmitEntrega() async {
+    print('AQUI SUBMIT');
     _data = widget.entrega;
+    var idEntrega = widget.item['idEntrega'];
+
     if (!isChecked && !_data.isValid()){
-      print(!isChecked );
-      print(!_data.isValid());
       var msg = ' ${ _data.name == null ? " Nome" : ""} ${_data.cpfCnpj == null ? " CPF" : ""} ${_data.assinatura == null ? " Assinatura" : ""} ${_data.imagens.length <= 0 ? ", Fotos" : ""} ';
 
       SnackMsg().error(context, "Complete as Informações: $msg");
@@ -118,8 +120,12 @@ class _StepperEntregasState extends State<StepperEntrega> {
         listUrls = await StorageFile().uploadImageFileToStorage(folder, _data.imagens);
          _data.imagens = listUrls;
       }
-      
+      print('SAVE ENTREGA CONCLUIDA');
       var res = await FirebaseServiceEntrega().updateEntrega(_data);
+      print('UPDATE ENTREGA');
+      if (_data.assinaturaUrl != null && listUrls.length > 0){
+        FirebaseServiceEntrega().setEntregaConcluida(idEntrega);
+      }
       Navigator.pop(context);
       Navigator.pop(context);
 
@@ -159,8 +165,12 @@ class _StepperEntregasState extends State<StepperEntrega> {
 
         _data.assinaturaUrl = assinaturaUrl;
         _data.imagens = listUrls;
-        
+        print('SAVE DATA');
         FirebaseServiceEntrega().saveEntrega(_data);
+        print('UPDATE ENTREGA ELSE');
+        if (_data.assinaturaUrl != null && listUrls.length > 0){
+          FirebaseServiceEntrega().setEntregaConcluida(idEntrega);
+        }
         if (_data.imagens != null) {
           Navigator.pop(context);
         }
@@ -437,13 +447,13 @@ class _StepperEntregasState extends State<StepperEntrega> {
                             ]
                         )
                       ),
-                      if (isChecked || _data != null && !(_data.assinaturaUrl != null || _data.imagens.length > 0)) Padding(
-                            padding: EdgeInsets.all(5),
+                      if (isChecked || _data != null && (_data.assinatura != null && _data.assinaturaUrl == null)) Padding(
+                            padding: const EdgeInsets.all(5),
                             child: Container( 
                               child : ElevatedButton.icon(
                                   onPressed: _onSubmitEntrega,
-                                  icon: Icon(Icons.check),
-                                  label: Text('Conlcuir Entrega')
+                                  icon: const Icon(Icons.check),
+                                  label: const Text('Conlcuir Entrega')
                                 ),
                               )
                         ),

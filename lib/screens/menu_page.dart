@@ -34,7 +34,7 @@ class _MenuPageState extends State<MenuPage> {
   
   @override
   Widget build(BuildContext context) {
-    // print(currentUser);
+
     funcionarioType = getTipoFuncionario();
     return FutureBuilder(
       future: getTipoFuncionario(), 

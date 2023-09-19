@@ -49,7 +49,7 @@ class Entrega {
         'cpfCnpj': cpfCnpj, 
         'location': { 'latitude': location!.lat, 'longitude': location!.lon, },
         'assinaturaUrl': assinaturaUrl != null ? assinaturaUrl : null, 
-        'imagens': imagens,
+        'imagens': imagens ?? [],
         'idEntrega': idEntrega,
         'observacao': observacao,
         'criadoEm': criadoEm?.toIso8601String(),
@@ -72,7 +72,7 @@ class Entrega {
       LocationEntrega(data?['location']['latitude'], data?['location']['longitude']),
       data?['assinatura'], 
       data?['assinaturaUrl'],
-      data?['imagens'], 
+      data?['imagens'] ?? [], 
       data?['idEntrega'], 
       data?['observacao'], 
       DateTime.parse(data?['criadoEm']), 
@@ -87,19 +87,21 @@ class Entrega {
         if (cpfCnpj != null) 'cpfCnpj': cpfCnpj, 
         if (location != null) 'location': { 'latitude': location!.lat, 'longitude': location!.lon, },
         if (assinaturaUrl != null) 'assinaturaUrl': assinaturaUrl, 
-        if (imagens != null) 'imagemsURL': imagens,
+        if (imagens != null) 'imagens': imagens ?? [],
         if (idEntrega != null) 'idEntrega': idEntrega,
         if (observacao != null) 'observacao': observacao,
         if (criadoEm != null) 'criadoEm': criadoEm?.toIso8601String(),
         if (alteradoEm != null) 'alteradoEm': alteradoEm?.toIso8601String(),
-        if (idEntregador != null) 'idEntregador': idEntregador.toString(),
+        if (idEntregador != null) 'idEntregador': idEntregador,
         if (observations != null) 'observations': observations
       };
 
   bool isValid(){
-    if( name != null && cpfCnpj != null && (assinatura != null || assinaturaUrl != null) && imagens!.length > 0 ){
+    if( name != null && cpfCnpj != null && (assinatura != null || assinaturaUrl != null) && (imagens != null )){
+      print('true');
       return true;
     }else{
+      print('false');
       return false;
     }
   }

@@ -25,11 +25,10 @@ class _ListEntregaState extends State<ListEntrega> {
   var entrega;
   var entregasRealizada = {};
 
-  Future<void> readjson() async {
-    final String response = await rootBundle.loadString('assets/imparfm-default-rtdb-export.json');
-    final data = await json.decode(response);
+  Future<void> getEntregas() async {
     final entregas = {};
     var entregador;
+    final uid;
     User? currentUser = FirebaseAuth.instance.currentUser;
 
 
@@ -38,17 +37,21 @@ class _ListEntregaState extends State<ListEntrega> {
     .get().then(
       (value) async { 
         entregador = value.docs != null ? value.docs[0].data() : null;
-        
-        data['entregas'].forEach((k, v) async {
-          if (v["entregador"].toString() == entregador['idEntregador']) {
-            entregas[k] = v;     
-          }
 
-        });
-        setState(() {
+        await FirebaseFirestore.instance.collection('entregas')
+        .where('entregador', isEqualTo: entregador['idEntregador'])
+        .get().then((value) {
+          var resultado =  value.docs != null ? value.docs[0].data() : null;
+          var id = value.docs != null ? value.docs[0].id : null;
+
+          entregas[id] = resultado;
+          entregas[id]['idEntrega'] = id;
+
+          setState(() {
           _entregas = entregas;
         });
-      });    
+      });
+    });    
   }
 
   Widget getIconList(int nrEntrega) {
@@ -60,9 +63,10 @@ class _ListEntregaState extends State<ListEntrega> {
   }
 
   Widget getIconListStatus(_entregue) {
-
+    print('AQUI');
+    print(_entregue['status']);
     return IconButton(
-      icon: _entregue
+      icon: _entregue['status']
       ? Icon(Icons.checklist_rtl, color: Colors.green.shade500) 
       : Icon(Icons.pending_actions_sharp),
       onPressed: () {},
@@ -83,11 +87,10 @@ class _ListEntregaState extends State<ListEntrega> {
  
   @override
   Widget build(BuildContext context) {
-    var _entregue = false;
     CollectionReference teste = FirebaseFirestore.instance.collection("teste_firestore");
 
     if (_entregas.isEmpty){
-      readjson();
+      getEntregas();
     }
 
     List<Widget> _items = [];
@@ -128,7 +131,7 @@ class _ListEntregaState extends State<ListEntrega> {
                     ));
                   },
                   //leading: //getIconListStatus(value['nrEntrega']) ///getIconList(value['nrEntrega']),
-                  trailing: getIconListStatus(_entregue)
+                  trailing: getIconListStatus(value)
                   // const Icon(Icons.pending_actions_sharp),
                   ),
                 ),
@@ -172,6 +175,7 @@ class EntregasFirebase {
   final Int16 filialEntrega;
   final Int16 filialOrigem;
   final Int64 nrEntrega;
+  final bool status;
 
   EntregasFirebase(
     this.doctos,
@@ -179,7 +183,8 @@ class EntregasFirebase {
     this.entregador, 
     this.filialEntrega, 
     this.filialOrigem,
-    this.nrEntrega);
+    this.nrEntrega,
+    this.status);
 
 
 }
